@@ -1,1 +1,30 @@
-<h1>Dashboard</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <div class="table">
+        <div class="table-row header">
+          <div class="table-header">
+            Projects
+          </div>
+          <div class="project-new">
+            <%= link_to new_project_path, class: 'btn' do %>
+            <button type="button" class="btn btn-default" aria-label="Left Align">
+              <span><i class="fa fa-plus"></i></span>
+            </button>
+            <% end %>
+          </div>
+        </div>
+        <% @projects.each do |project| %>
+          <div class="table-row">
+            <p class="title is-4">
+              <%= link_to project.name, project %>
+            </p>
+            <p>
+              Team:
+            </p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
