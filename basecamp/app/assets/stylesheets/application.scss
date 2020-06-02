@@ -1,0 +1,59 @@
+@import "bootstrap";
+
+body {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: "Times New Roman", Times, serif;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  &:hover {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+h1 {
+  margin-bottom: 0;
+  font-family: Impact, Charcoal, sans-serif;
+}
+
+.main-header {
+  margin-bottom: 10px;
+  height: 50px;
+}
+
+.align-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.sign-buttons {
+  .btn {
+    margin-right: 5px;
+  }
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+
+  .user-info-email {
+    font-weight: 600;
+    margin-right: 10px;
+  }
+}
+
+.sign-up-form,
+.sign-in-form {
+  padding-top: 30px;
+}

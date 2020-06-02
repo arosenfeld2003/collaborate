@@ -4,12 +4,37 @@
     <title>Basecamp</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= stylesheet_link_tag "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <div class="container">
+      <header class="main-header">
+        <div class="row">
+          <div class="col-md-4">
+            <%= link_to root_path, class:"page-header" do %>
+              <h1>MyBasecamp</h1>
+            <% end  %>
+          </div>
+          <div class="col-md-8 ml-auto align-right">
+            <% if user_signed_in? %>
+              <div class="user-info">
+                <div class="user-info-email">Welcome <%= current_user.email %></div>
+                <%= link_to "Log Out", destroy_user_session_path, method: :delete, class:"btn btn-primary" %>
+              </div>
+            <% else %>
+              <div class="btn-group sign-buttons">
+                <%= link_to "Sign In", new_user_session_path, class:"btn btn-primary" %>
+                <%= link_to "Sign up", new_user_registration_path, class:"btn btn-primary"%>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </header>
+    </div>
     <%= yield %>
   </body>
 </html>
