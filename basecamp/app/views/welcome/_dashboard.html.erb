@@ -4,24 +4,37 @@
       <div class="table">
         <div class="table-row header">
           <div class="table-header">
-            Projects
+            <h2>Projects</h2>
           </div>
           <div class="project-new">
             <%= link_to new_project_path, class: 'btn' do %>
-            <button type="button" class="btn btn-default" aria-label="Left Align">
-              <span><i class="fa fa-plus"></i></span>
+            <button type="button" class="btn btn-primary" aria-label="Center Align">
+              Add new project
             </button>
             <% end %>
           </div>
         </div>
         <% @projects.each do |project| %>
           <div class="table-row">
-            <p class="title is-4">
-              <%= link_to project.name, project %>
-            </p>
-            <p>
-              Team:
-            </p>
+            <div class="project">
+              <p class="title is-4">
+                <%= link_to project.name, project, class: 'project-name' %>
+              </p>
+              <div class="members">
+                <div class="members-list">
+                  <% @members.each do |member| %>
+                    <p class="member-name">
+                      <%= link_to member.name, member %>
+                    </p>
+                  <% end %>
+                </div>
+                <%= link_to new_member_path, class: 'btn' do %>
+                  <button type="button" class="btn btn-primary" aria-label="Center Align">
+                    Add new member
+                  </button>
+                <% end %>
+              </div>
+            </div>
           </div>
         <% end %>
       </div>

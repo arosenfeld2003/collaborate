@@ -141,3 +141,49 @@
     }
 
 }
+
+.table {
+  padding-top: 50px;
+}
+
+.table-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+
+}
+
+.table-row.header {
+  border-bottom: 2px solid black;
+}
+
+.project {
+  padding: 20px;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.project-name {
+  font-size: 21px;
+  font-weight: bold;
+}
+
+.members-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.members-header {
+  font-size: 16px;
+}
+
+.members-list {
+  display: flex;
+}
+
+.member-name {
+  margin-right: 5px;
+}
