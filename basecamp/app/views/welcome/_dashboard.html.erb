@@ -14,32 +14,34 @@
             <% end %>
           </div>
         </div>
-        <% @projects.each do |project| %>
-          <div class="table-row">
-            <div class="project">
-              <p class="title is-4">
-                <%= link_to project.name, project, class: 'project-name' %>
-              </p>
-              <p class="project_creator">
-                Created by: <%#= @user.name %>
-              </p>
-              <div class="members">
-                <div class="members-list">
-                  <%# @users.each do |member| %>
-                    <p class="member-name">
-                      <%#= link_to member.name, member %>
-                    </p>
-                  <%# end %>
+        <div class="table-wrap">
+          <% @projects.each do |project| %>
+            <div class="table-row">
+              <div class="project">
+                <p class="title is-4">
+                  <%= link_to project.name, project, class: 'project-name' %>
+                </p>
+                <p class="project_creator">
+                  Created by: <%= project.user.name %>
+                </p>
+                <div class="members">
+                  <div class="members-list">
+                    <%# @users.each do |member| %>
+                      <p class="member-name">
+                        <%#= link_to member.name, member %>
+                      </p>
+                    <%# end %>
+                  </div>
+                  <%= link_to new_member_path, class: 'btn' do %>
+                    <button type="button" class="btn btn-primary" aria-label="Center Align">
+                      Add new member
+                    </button>
+                  <% end %>
                 </div>
-                <%= link_to new_member_path, class: 'btn' do %>
-                  <button type="button" class="btn btn-primary" aria-label="Center Align">
-                    Add new member
-                  </button>
-                <% end %>
               </div>
             </div>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>

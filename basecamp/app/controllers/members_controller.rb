@@ -24,7 +24,7 @@ class MembersController < ApplicationController
   # POST /members
   # POST /members.json
   def create
-    @member = Member.new(member_params)
+    @member = @project.members.build(member_params)
 
     respond_to do |format|
       if @member.save

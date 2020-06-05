@@ -2,7 +2,9 @@ class WelcomeController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :update, :destroy]
 
   def index
-    @projects = Project.all
-    @members = Member.all
+    if user_signed_in?
+      @projects = Project.where("user_id=?", current_user.id)
+      @members = Member.all
+    end
   end
 end
