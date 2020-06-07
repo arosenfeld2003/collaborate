@@ -8,6 +8,12 @@
 <p>
   <strong>Description:</strong>
   <%= @project.description %>
+
+  <%= link_to new_member_path, class: 'btn' do %>
+    <button type="button" class="btn btn-primary" aria-label="Center Align">
+      Add new member
+    </button>
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_project_path(@project) %> |

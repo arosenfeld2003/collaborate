@@ -24,7 +24,7 @@ class MembersController < ApplicationController
   # POST /members
   # POST /members.json
   def create
-    @member = @project.members.build(member_params)
+    @member = Member.new(member_params)
 
     respond_to do |format|
       if @member.save
@@ -69,6 +69,6 @@ class MembersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def member_params
-      params.require(:member).permit(:name, :email)
+      params.require(:member).permit(:name, :email, :project_id)
     end
 end
