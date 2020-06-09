@@ -25,12 +25,17 @@
                   Created by: <%= project.user.name %>
                 </p>
                 <div class="members">
+                  <div class="members-title">
+                    Members:
+                  </div>
                   <div class="members-list">
-                    <%# @users.each do |member| %>
-                      <p class="member-name">
-                        <%#= link_to member.name, member %>
-                      </p>
-                    <%# end %>
+                    <% @members.each do |member| %>
+                      <% if member.project_id == project.id %>
+                        <p class="member-name">
+                          <%= member.name %>
+                        </p>
+                      <% end %>
+                    <% end %>
                   </div>
                 </div>
               </div>

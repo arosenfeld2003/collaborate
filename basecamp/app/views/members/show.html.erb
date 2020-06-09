@@ -10,5 +10,5 @@
   <%= @member.email %>
 </p>
 
-<%= link_to 'Edit', edit_member_path(@member) %> |
-<%= link_to 'Back', members_path %>
+<%= link_to 'Edit', edit_project_member_path(@project, @member) %> |
+<%= link_to 'Back', project_members_path(@project) %>

@@ -9,10 +9,18 @@
   <strong>Description:</strong>
   <%= @project.description %>
 
-  <%= link_to new_member_path, class: 'btn' do %>
+  <%= link_to new_project_member_path(@project), class: 'btn' do %>
     <button type="button" class="btn btn-primary" aria-label="Center Align">
       Add new member
     </button>
+  <% end %>
+</p>
+
+<p>
+  Members:
+
+  <% @members.each do |member| %>
+    <p><%= member.name %></p>
   <% end %>
 </p>
 
