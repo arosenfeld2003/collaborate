@@ -29,6 +29,9 @@
                     Members:
                   </div>
                   <div class="members-list">
+                    <p class="member-name">
+                      <%= project.user.name %>
+                    </p>
                     <% @members.each do |member| %>
                       <% if member.project_id == project.id %>
                         <p class="member-name">
