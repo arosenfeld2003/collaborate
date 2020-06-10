@@ -21,7 +21,7 @@
                 <p class="title is-4">
                   <%= link_to project.name, project, class: 'project-name' %>
                 </p>
-                <p class="project_creator">
+                <p class="project-creator">
                   Created by: <%= project.user.name %>
                 </p>
                 <div class="members">
@@ -29,13 +29,10 @@
                     Members:
                   </div>
                   <div class="members-list">
-                    <p class="member-name">
-                      <%= project.user.name %>
-                    </p>
                     <% @members.each do |member| %>
                       <% if member.project_id == project.id %>
                         <p class="member-name">
-                          <%= member.name %>
+                          <%= link_to member.name, edit_project_member_path(project, member) %>
                         </p>
                       <% end %>
                     <% end %>

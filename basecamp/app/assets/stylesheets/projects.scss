@@ -1,3 +1,54 @@
 // Place all the styles related to the Projects controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.project-show {
+  padding-top: 50px;
+}
+
+.project-members {
+  padding-top: 20px;
+  display: flex;
+  padding-bottom: 30px;
+
+  .btn {
+    font-size: 12px;
+    margin-left: 20px;
+  }
+}
+
+.project-members-title {
+  font-size: 18px;
+  text-decoration: underline;
+}
+
+.project-members-list-wrap {
+  display: flex;
+  p {
+    font-size: 16px;
+    font-style: italic;
+    margin-right: 5px;
+  }
+
+  a {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.project-creator {
+  font-size: 14px;
+  font-style: italic;
+}
+
+.project-btn-wrap {
+  padding-top: 30px;
+  border-top: 1px solid black;
+}
+
+.project-name {
+  &:hover {
+    text-decoration: underline;
+  }
+}
