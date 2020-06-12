@@ -1,5 +1,13 @@
-<h1>New Member</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <div class="members-container">
+        <h2>New Member</h2>
 
-<%= render 'form', member: @member %>
+        <%= render 'form', member: @member %>
 
-<%= link_to 'Back', project_members_path(@project) %>
+        <%= link_to 'Back', project_members_path(@project), class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+</div>

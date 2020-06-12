@@ -1,6 +1,16 @@
-<h1>Editing Member</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-8">
+      <div class="members-container">
 
-<%= render 'form', member: @member %>
+        <h2>Editing Member</h2>
 
-<%= link_to 'Show', [@project, @member] %> |
-<%= link_to 'Back', project_members_path(@project) %>
+        <%= render 'form', member: @member %>
+
+        <%= link_to 'Show', [@project, @member], class: "btn btn-primary" %>
+        <%= link_to 'Back', project_members_path(@project), class: "btn btn-primary" %>
+
+      </div>
+    </div>
+  </div>
+</div>

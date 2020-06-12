@@ -2,27 +2,27 @@ class MembersController < ApplicationController
   before_action :get_project
   before_action :set_member, only: [:show, :edit, :update, :destroy]
 
-  # GET /members
+  # GET /members  -> projects/members
   # GET /members.json
   def index
     @members = @project.members
   end
 
-  # GET /members/1
+  # GET /members/1  -> projects/project_id/members/id
   # GET /members/1.json
   def show
   end
 
-  # GET /members/new
+  # GET /members/new -> projects/members/new
   def new
     @member = @project.members.build
   end
 
-  # GET /members/1/edit
+  # GET /members/1/edit -> projects/project_id/members/1/edit
   def edit
   end
 
-  # POST /members
+  # POST /members -> projects/members
   # POST /members.json
   def create
     @member = @project.members.build(member_params)
@@ -38,7 +38,7 @@ class MembersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /members/1
+  # PATCH/PUT /members/1  -> projects/project_id/members/1
   # PATCH/PUT /members/1.json
   def update
     respond_to do |format|
@@ -52,7 +52,7 @@ class MembersController < ApplicationController
     end
   end
 
-  # DELETE /members/1
+  # DELETE /members/1 -> projects/project_id/members/1
   # DELETE /members/1.json
   def destroy
     @member.destroy
