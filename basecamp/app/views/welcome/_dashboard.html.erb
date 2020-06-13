@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <div class="table">
+        <div class="table-row header">
+          <div class="table-header">
+            <h2>Projects</h2>
+          </div>
+          <div class="project-add-new">
+            <%= link_to new_project_path, class: 'btn' do %>
+            <button type="button" class="btn btn-primary" aria-label="Center Align">
+              Add new project
+            </button>
+            <% end %>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <% @projects.each do |project| %>
+            <div class="table-row">
+              <div class="project">
+                <p class="title is-4">
+                  <%= link_to project.name, project, class: 'project-name' %>
+                </p>
+                <p class="project-creator">
+                  Created by: <%= project.user.name %>
+                </p>
+                <div class="members">
+                  <div class="members-title">
+                    Members:
+                  </div>
+                  <div class="members-list">
+                    <% project.members.each do |member| %>
+                      <% if member.project_id == project.id %>
+                        <p class="member-name">
+                          <%= link_to member.name, edit_project_member_path(project, member) %>
+                        </p>
+                      <% end %>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

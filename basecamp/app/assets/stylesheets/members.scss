@@ -1,0 +1,32 @@
+// Place all the styles related to the Members controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+
+.members-list {
+  display: flex;
+  margin-right: 5px;
+}
+
+.members-container {
+  padding-top: 50px;
+
+  h2 {
+    margin-bottom: 30px;
+  }
+}
+
+.members-table {
+  th {
+    font-size: 21px;
+    padding: 20px;
+  }
+
+  td {
+    padding: 20px;
+  }
+
+  tr {
+    border-bottom: 1px solid black;
+  }
+}
