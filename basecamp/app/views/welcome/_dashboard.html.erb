@@ -29,7 +29,7 @@
                     Members:
                   </div>
                   <div class="members-list">
-                    <% @members.each do |member| %>
+                    <% project.members.each do |member| %>
                       <% if member.project_id == project.id %>
                         <p class="member-name">
                           <%= link_to member.name, edit_project_member_path(project, member) %>

@@ -4,7 +4,6 @@ class WelcomeController < ApplicationController
   def index
     if user_signed_in?
       @projects = Project.where("user_id=?", current_user.id)
-      @members = Member.all
     end
   end
 end
