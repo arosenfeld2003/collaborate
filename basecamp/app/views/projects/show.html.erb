@@ -21,7 +21,8 @@
               <% end %>
             </div>
           </div>
-          <% if @activeMember.is_admin %>
+          <% if @activeMember && @activeMember.is_admin ||
+              current_user.id == @project.user.id %>
             <%= link_to new_project_member_path(@project), class: 'btn' do %>
               <button type="button" class="btn btn-primary" aria-label="Center Align">
                 Add new member
@@ -32,7 +33,8 @@
 
           <div class="project-btn-wrap">
             <%= link_to 'Back', projects_path, class:"btn btn-primary" %>
-            <% if @activeMember.is_admin %>
+            <% if @activeMember && @activeMember.is_admin ||
+                current_user.id == @project.user.id %>
               <%= link_to 'Edit Project', edit_project_path(@project), class:"btn btn-primary" %>
               <%= link_to 'Destroy Project', @project, method: :delete, class:"btn btn-primary", data: { confirm: 'Are you sure?' } %>
             <% end %>
