@@ -15,3 +15,14 @@ require("channels")
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
+window.onload = function() {
+  const projectsAllBtn = document.querySelector('.projects-filter-all');
+  const projectsByOwner = document.querySelector('.projects-filter-owner');
+  const projectsByMember = document.querySelector('.projects-filter-member');
+
+  projectsAllBtn.addEventListener('click', event => {
+    event.preventDefault();
+    alert("Hello");
+  });
+}
