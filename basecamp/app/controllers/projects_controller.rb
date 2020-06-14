@@ -12,6 +12,13 @@ class ProjectsController < ApplicationController
   # GET /projects/1.json
   def show
     @members = Member.where("project_id=?", params[:id])
+    if @members
+      @members.each do |member|
+        if member.email == current_user.email
+          @activeMember = member
+        end
+      end
+    end
   end
 
   # GET /projects/new
