@@ -17,12 +17,36 @@ require("channels")
 // const imagePath = (name) => images(name, true)
 
 window.onload = function() {
-  const projectsAllBtn = document.querySelector('.projects-filter-all');
-  const projectsByOwner = document.querySelector('.projects-filter-owner');
-  const projectsByMember = document.querySelector('.projects-filter-member');
+  const projectsBtns = document.querySelectorAll('.projects-filter-btn');
+  const projectsContent = document.querySelectorAll('.table-wrap');
 
-  projectsAllBtn.addEventListener('click', event => {
-    event.preventDefault();
-    alert("Hello");
-  });
+  const toggleProjects = () => {
+
+    for (let i = 0; i < projectsBtns.length; i++) {
+
+      projectsBtns[i].addEventListener('click', event => {
+        event.preventDefault();
+        let target = event.target;
+        let tabContent = document.getElementById(target.getAttribute("href"));
+        removeActive(projectsBtns);
+        hideContent(projectsContent);
+        target.classList.add("active");
+        tabContent.classList.remove("hide");
+      });
+    }
+  }
+
+  const removeActive = (array) => {
+    for (let i = 0; i < array.length; i++) {
+      array[i].classList.remove("active");
+    }
+  }
+
+  const hideContent = (array) => {
+    for (let i = 0; i < array.length; i++) {
+      array[i].classList.add("hide");
+    }
+  }
+
+  toggleProjects();
 }
