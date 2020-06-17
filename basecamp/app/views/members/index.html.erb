@@ -24,7 +24,7 @@
                 <td><%= member.is_admin %></td>
                 <td>
                   <%= link_to 'Edit Member', edit_project_member_path(@project, member), class:"btn btn-primary" %>
-                  <%= link_to 'Destroy Member', [@project, member], class:"btn btn-primary", method: :delete, data: { confirm: 'Are you sure?' } %>
+                  <%= link_to 'Destroy Member', [@project, member], class:"btn btn-outline-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
                 </td>
               </tr>
             <% end %>

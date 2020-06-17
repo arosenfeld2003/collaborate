@@ -1,40 +1,132 @@
 <div class="container">
   <div class="row">
-    <div class="col-12">
-      <div class="projects-index">
-        <h2>Projects</h2>
-
-        <table class="projects-table">
-          <thead>
-            <tr class="projects-table-row">
-              <th>Name</th>
-              <th>Description</th>
-              <th colspan="3"></th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <% @projects.each do |project| %>
-              <% if @activeMember && @activeMember.is_admin ||
-                  current_user.id == project.user.id %>
-                <tr class="projects-table-row">
-                  <td><%= project.name %></td>
-                  <td><%= project.description %></td>
-                  <td>
-                    <%= link_to 'Show', project, class:"btn btn-primary" %>
-                    <%= link_to 'Edit', edit_project_path(project), class:"btn btn-primary" %>
-                    <%= link_to 'Destroy', project, class:"btn btn-primary", method: :delete, data: { confirm: 'Are you sure?' } %>
-                  </td>
-
-                </tr>
-              <% end %>
+    <div class="col-6">
+      <div class="table">
+        <div class="table-row header">
+          <div class="table-header">
+            <h2>Projects</h2>
+          </div>
+          <div class="project-add-new">
+            <%= link_to new_project_path, class: 'btn' do %>
+              <button type="button" class="btn btn-primary" aria-label="Center Align">
+                Add new project
+              </button>
             <% end %>
-          </tbody>
-        </table>
-
-        <br>
-
-        <%= link_to 'New Project', new_project_path, class:"btn btn-primary" %>
+          </div>
+        </div>
+        <div class="projects-filter">
+          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <div id="all" class="btn btn-primary btn-sm projects-filter-btn">All</div>
+            <div id="owner" class="btn btn-primary btn-sm projects-filter-btn">Owner</div>
+            <div id="member" class="btn btn-primary btn-sm projects-filter-btn">Member</div>
+          </div>
+        </div>
+        <div class="table-wrap" id="all">
+          <% classification = '' %>
+          <% @projects.each do |project| %>
+            <% if @projectsByOwner.include?(project) %>
+              <% classification = 'owner' %>
+            <% elsif @projectsByMember.include?(project) %>
+              <% classification = 'member' %>
+            <% end %>
+            <div class = "<%= "#{classification}"  %>" >
+              <div class="table-row">
+                <div class="project">
+                  <div class="project-header">
+                    <p class="title is-4">
+                      <%= link_to project.name, project, class: 'project-name' %>
+                    </p>
+                    <p class="project-creator">
+                      Created by: <%= project.user.name %>
+                    </p>
+                  </div>
+                  <div class="project-content">
+                    <p class="project-description">
+                      <%= project.description %>
+                    </p>
+                  </div>
+                  <div class="members">
+                    <div class="members-title">
+                      Members:
+                    </div>
+                    <div class="members-list">
+                      <% project.members.each do |member| %>
+                        <% if member.project_id == project.id %>
+                          <%= link_to edit_project_member_path(project, member), class:"members-list-link" do %>
+                            <div class="members-list-details">
+                              <p class="member-name">
+                                <%= member.name %>
+                              </p>
+                              <p class="member-email">
+                                <%= member.email %>
+                              </p>
+                            </div>
+                          <% end %>
+                        <% end %>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <div class="table-wrap hide" id="owner">
+          <% @projectsByOwner.each do |project| %>
+            <div class="table-row">
+              <div class="project">
+                <p class="title is-4">
+                  <%= link_to project.name, project, class: 'project-name' %>
+                </p>
+                <p class="project-creator">
+                  Created by: <%= project.user.name %>
+                </p>
+                <div class="members">
+                  <div class="members-title">
+                    Members:
+                  </div>
+                  <div class="members-list">
+                    <% project.members.each do |member| %>
+                      <% if member.project_id == project.id %>
+                        <p class="member-name">
+                          <%= link_to member.name, edit_project_member_path(project, member) %>
+                        </p>
+                      <% end %>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <div class="table-wrap hide" id="member">
+          <% @projectsByMember.each do |project| %>
+            <div class="table-row">
+              <div class="project">
+                <p class="title is-4">
+                  <%= link_to project.name, project, class: 'project-name' %>
+                </p>
+                <p class="project-creator">
+                  Created by: <%= project.user.name %>
+                </p>
+                <div class="members">
+                  <div class="members-title">
+                    Members:
+                  </div>
+                  <div class="members-list">
+                    <% project.members.each do |member| %>
+                      <% if member.project_id == project.id %>
+                        <p class="member-name">
+                          <%= link_to member.name, edit_project_member_path(project, member) %>
+                        </p>
+                      <% end %>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
