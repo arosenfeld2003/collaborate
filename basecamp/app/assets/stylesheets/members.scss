@@ -4,8 +4,9 @@
 
 
 .members-list {
-  display: flex;
   margin-right: 5px;
+  display: flex;
+  flex-direction: column;
 }
 
 .members-container {
@@ -29,4 +30,12 @@
   tr {
     border-bottom: 1px solid black;
   }
+}
+
+.members-list-link {
+  display: block;
+}
+
+.members-list-details {
+  display: flex;
 }

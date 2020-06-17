@@ -17,7 +17,15 @@
             </div>
             <div class="project-members-list-wrap">
               <% @members.each do |member| %>
-                <p><%= link_to member.name, edit_project_member_path(@project, member) %></p>
+                <%= link_to edit_project_member_path(@project, member) do %>
+                  <div class="project-member-info">
+                    <p><%= member.name %></p>
+                    <p><%= member.email %></p>
+                    <% if member.is_admin %>
+                      <i class="fas fa-star"></i>
+                    <% end %>
+                  </div>
+                <% end %>
               <% end %>
             </div>
           </div>
@@ -36,7 +44,7 @@
             <% if @activeMember && @activeMember.is_admin ||
                 current_user.id == @project.user.id %>
               <%= link_to 'Edit Project', edit_project_path(@project), class:"btn btn-primary" %>
-              <%= link_to 'Destroy Project', @project, method: :delete, class:"btn btn-primary", data: { confirm: 'Are you sure?' } %>
+              <%= link_to 'Destroy Project', @project, method: :delete, class:"btn btn-outline-danger", data: { confirm: 'Are you sure?' } %>
             <% end %>
           </div>
       </div>
