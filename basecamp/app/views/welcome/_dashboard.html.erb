@@ -22,7 +22,14 @@
           </div>
         </div>
         <div class="table-wrap" id="all">
-          <% @projects.each do |project| %>
+        <% classification = '' %>
+        <% @projects.each do |project| %>
+          <% if @projectsByOwner.include?(project) %>
+            <% classification = 'owner' %>
+          <% elsif @projectsByMember.include?(project) %>
+            <% classification = 'member' %>
+          <% end %>
+          <div class = "<%= "#{classification}"  %>" >
             <div class="table-row">
               <div class="project">
                 <p class="title is-4">
@@ -47,7 +54,8 @@
                 </div>
               </div>
             </div>
-          <% end %>
+          </div>
+        <% end %>
         </div>
         <div class="table-wrap hide" id="owner">
           <% @projectsByOwner.each do |project| %>
