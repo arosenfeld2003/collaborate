@@ -8,54 +8,54 @@
           </div>
           <div class="project-add-new">
             <%= link_to new_project_path, class: 'btn' do %>
-            <button type="button" class="btn btn-primary" aria-label="Center Align">
-              Add new project
-            </button>
+              <button type="button" class="btn btn-primary" aria-label="Center Align">
+                Add new project
+              </button>
             <% end %>
           </div>
         </div>
         <div class="projects-filter">
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
-            <a href="all" class="btn btn-primary btn-sm projects-filter-btn">All</a>
-            <a href="owner" class="btn btn-primary btn-sm projects-filter-btn">Owner</a>
-            <a href="member" class="btn btn-primary btn-sm projects-filter-btn">Member</a>
+            <div id="all" class="btn btn-primary btn-sm projects-filter-btn">All</div>
+            <div id="owner" class="btn btn-primary btn-sm projects-filter-btn">Owner</div>
+            <div id="member" class="btn btn-primary btn-sm projects-filter-btn">Member</div>
           </div>
         </div>
         <div class="table-wrap" id="all">
-        <% classification = '' %>
-        <% @projects.each do |project| %>
-          <% if @projectsByOwner.include?(project) %>
-            <% classification = 'owner' %>
-          <% elsif @projectsByMember.include?(project) %>
-            <% classification = 'member' %>
-          <% end %>
-          <div class = "<%= "#{classification}"  %>" >
-            <div class="table-row">
-              <div class="project">
-                <p class="title is-4">
-                  <%= link_to project.name, project, class: 'project-name' %>
-                </p>
-                <p class="project-creator">
-                  Created by: <%= project.user.name %>
-                </p>
-                <div class="members">
-                  <div class="members-title">
-                    Members:
-                  </div>
-                  <div class="members-list">
-                    <% project.members.each do |member| %>
-                      <% if member.project_id == project.id %>
-                        <p class="member-name">
-                          <%= link_to member.name, edit_project_member_path(project, member) %>
-                        </p>
+          <% classification = '' %>
+          <% @projects.each do |project| %>
+            <% if @projectsByOwner.include?(project) %>
+              <% classification = 'owner' %>
+            <% elsif @projectsByMember.include?(project) %>
+              <% classification = 'member' %>
+            <% end %>
+            <div class = "<%= "#{classification}"  %>" >
+              <div class="table-row">
+                <div class="project">
+                  <p class="title is-4">
+                    <%= link_to project.name, project, class: 'project-name' %>
+                  </p>
+                  <p class="project-creator">
+                    Created by: <%= project.user.name %>
+                  </p>
+                  <div class="members">
+                    <div class="members-title">
+                      Members:
+                    </div>
+                    <div class="members-list">
+                      <% project.members.each do |member| %>
+                        <% if member.project_id == project.id %>
+                          <p class="member-name">
+                            <%= link_to member.name, edit_project_member_path(project, member) %>
+                          </p>
+                        <% end %>
                       <% end %>
-                    <% end %>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        <% end %>
+          <% end %>
         </div>
         <div class="table-wrap hide" id="owner">
           <% @projectsByOwner.each do |project| %>
