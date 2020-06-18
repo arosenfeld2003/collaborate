@@ -52,6 +52,16 @@ class MembersController < ApplicationController
     end
   end
 
+  def unsubscribe
+    member = Member.find(params[:member_id])
+    member.destroy
+    respond_to do |format|
+      format.html { redirect_to projects_path, notice: 'You successfully unsubscribed from the project.' }
+      format.json { head :no_content }
+    end
+  end
+
+
   # DELETE /members/1 -> projects/project_id/members/1
   # DELETE /members/1.json
   def destroy
