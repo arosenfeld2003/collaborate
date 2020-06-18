@@ -21,63 +21,69 @@
             <div id="member" class="btn btn-outline-primary btn-sm projects-filter-btn">Member</div>
           </div>
         </div>
-        <div class="table-wrap" id="all">
-          <% classification = '' %>
-          <% @projects.each do |project| %>
-            <% if @projectsByOwner.include?(project) %>
-              <% classification = 'owner' %>
-            <% elsif @projectsByMember.include?(project) %>
-              <% classification = 'member' %>
-            <% end %>
-            <div class = "<%= "#{classification}"  %>" >
-              <div class="table-row">
-                <div class="project">
-                  <div class="project-header-wrap">
-                    <div class="project-header">
-                      <p class="title is-4">
-                        <%= link_to project.name, project, class: 'project-name' %>
-                      </p>
-                      <p class="project-creator">
-                        Created by: <%= project.user.name %>
-                      </p>
-                    </div>
-                    <% if project.member %>
-                      <%= link_to 'Unsubscribe', project_member_unsubscribe_path(project, project.member),
-                      :method => :delete, class:"btn btn-outline-danger",
-                             data: { confirm: 'Are you sure you want to Unsubsciribe from this project?' } %>
-                    <% end %>
-                  </div>
-                  <div class="project-content">
-                    <p class="project-description">
-                      <%= project.description %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="row table-wrap">
+        <% classification = '' %>
+        <% @projects.each do |project| %>
+          <% if @projectsByOwner.include?(project) %>
+            <% classification = 'owner' %>
+          <% elsif @projectsByMember.include?(project) %>
+            <% classification = 'member' %>
+          <% end %>
+          <div class = "<%= "#{classification} col-4"  %>" >
+            <div class="table-row">
+              <div class="project">
+                <div class="project-header-wrap">
+                  <div class="project-header">
+                    <p class="title is-4">
+                      <%= link_to project.name, project, class: 'project-name' %>
+                    </p>
+                    <p class="project-creator">
+                      Created by: <%= project.user.name %>
                     </p>
                   </div>
-                  <div class="members">
+                  <% if project.member %>
+                    <%= link_to 'Unsubscribe', project_member_unsubscribe_path(project, project.member),
+                    :method => :delete, class:"btn btn-outline-danger",
+                           data: { confirm: 'Are you sure you want to Unsubsciribe from this project?' } %>
+                  <% end %>
+                </div>
+                <div class="project-content">
+                  <p class="project-description">
+                    <%= project.description %>
+                  </p>
+                </div>
+                <div class="members">
+                  <% if project.members.first %>
                     <div class="members-title">
                       Members:
                     </div>
-                    <div class="members-list">
-                      <% project.members.each do |member| %>
-                        <% if member.project_id == project.id %>
-                          <%= link_to edit_project_member_path(project, member), class:"members-list-link" do %>
-                            <div class="members-list-details">
-                              <p class="member-name">
-                                <%= member.name %>
-                              </p>
-                              <p class="member-email">
-                                <%= member.email %>
-                              </p>
-                            </div>
-                          <% end %>
+                  <% end %>
+                  <div class="members-list">
+                    <% project.members.each do |member| %>
+                      <% if member.project_id == project.id %>
+                        <%= link_to edit_project_member_path(project, member), class:"members-list-link" do %>
+                          <div class="members-list-details">
+                            <p class="member-name">
+                              <%= member.name %>
+                            </p>
+                            <p class="member-email">
+                              <%= member.email %>
+                            </p>
+                          </div>
                         <% end %>
                       <% end %>
-                    </div>
+                    <% end %>
                   </div>
                 </div>
               </div>
             </div>
-          <% end %>
-        </div>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
