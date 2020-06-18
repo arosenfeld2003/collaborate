@@ -38,4 +38,8 @@
 
 .members-list-details {
   display: flex;
+
+  &:hover {
+    color: #6c757d;
+  }
 }

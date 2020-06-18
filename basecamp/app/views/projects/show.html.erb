@@ -9,6 +9,10 @@
           Created by: <%= @project.user.name %>
         </div>
 
+        <div class="project-show-description">
+          <p><%= @project.description %></p>
+        </div>
+
         <div class="project-members">
 
           <div class="project-members-list">
@@ -21,9 +25,6 @@
                   <div class="project-member-info">
                     <p><%= member.name %></p>
                     <p><%= member.email %></p>
-                    <% if member.is_admin %>
-                      <i class="fas fa-star"></i>
-                    <% end %>
                   </div>
                 <% end %>
               <% end %>
@@ -40,7 +41,7 @@
         </div>
 
           <div class="project-btn-wrap">
-            <%= link_to 'Back', projects_path, class:"btn btn-primary" %>
+            <%= link_to 'Back', projects_path, class:"btn btn-outline-primary" %>
             <% if @activeMember && @activeMember.is_admin ||
                 current_user.id == @project.user.id %>
               <%= link_to 'Edit Project', edit_project_path(@project), class:"btn btn-primary" %>
