@@ -4,6 +4,10 @@
 
 .project-show {
   padding-top: 50px;
+
+  .project-creator {
+    margin-bottom: 30px;
+  }
 }
 
 .project-members {
@@ -37,6 +41,10 @@
 
 .project-member-info {
   display: flex;
+
+  &:hover {
+    color: #6c757d;
+  }
 }
 
 .project-creator {
@@ -52,6 +60,7 @@
 .project-name {
   &:hover {
     text-decoration: underline;
+    color: #007bff;
   }
 }
 
