@@ -124,3 +124,9 @@
 .project-content {
   margin-bottom: 20px;
 }
+
+.project-header-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
