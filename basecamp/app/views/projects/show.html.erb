@@ -6,7 +6,11 @@
         <h2 class="project-show-name"><%= @project.name %></h2>
 
         <div class="project-creator">
-          Created by: <%= @project.user.name %>
+          <% if @project.user %>
+            Project Created by: <%= @project.user.name %>
+          <% else %>
+            Project creator has canceled their account!
+          <% end %>
         </div>
 
         <div class="project-show-description">
