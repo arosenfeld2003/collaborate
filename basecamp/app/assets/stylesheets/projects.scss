@@ -41,9 +41,14 @@
 
 .project-member-info {
   display: flex;
+  align-items: center;
 
   &:hover {
     color: #6c757d;
+  }
+
+  .fa {
+    color: orange;
   }
 }
 
