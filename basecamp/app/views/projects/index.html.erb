@@ -43,7 +43,11 @@
                       <%= link_to project.name, project, class: 'project-name' %>
                     </p>
                     <p class="project-creator">
-                      Created by: <%= project.user.name %>
+                      <% if project.user %>
+                        Created by: <%= project.user.name %>
+                      <% else %>
+                        Project currently has no owner!
+                      <% end %>
                     </p>
                   </div>
                   <% if project.member %>
