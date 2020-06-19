@@ -70,19 +70,17 @@
                   <div class="members-list">
                     <% project.members.each do |member| %>
                       <% if member.project_id == project.id %>
-                        <%= link_to edit_project_member_path(project, member), class:"members-list-link" do %>
-                          <div class="members-list-details">
-                            <p class="member-name">
-                              <%= member.name %>
-                            </p>
-                            <p class="member-email">
-                              <%= member.email %>
-                            </p>
-                            <% if member.is_admin %>
-                              <i class="fa fa-star"></i>
-                            <% end %>
-                          </div>
-                        <% end %>
+                        <div class="members-list-details">
+                          <p class="member-name">
+                            <%= member.name %>
+                          </p>
+                          <p class="member-email">
+                            <%= member.email %>
+                          </p>
+                          <% if member.is_admin %>
+                            <i class="fa fa-star"></i>
+                          <% end %>
+                        </div>
                       <% end %>
                     <% end %>
                   </div>

@@ -4,7 +4,8 @@
       <div class="members-container">
 
         <h2>Members</h2>
-        <%= link_to 'Show Project', [@project], class:"btn btn-primary" %>
+
+        <%= link_to 'Add new Member', new_project_member_path(@project), class:"btn btn-primary" %>
 
         <table class="members-table">
           <thead>
@@ -21,9 +22,15 @@
               <tr>
                 <td><%= member.name %></td>
                 <td><%= member.email %></td>
-                <td><%= member.is_admin %></td>
                 <td>
-                  <%= link_to 'Edit Member', edit_project_member_path(@project, member), class:"btn btn-primary" %>
+                  <% if member.is_admin %>
+                    <p> Admin </p>
+                  <% else %>
+                    <p> Not Admin </p>
+                  <% end %>
+                </td>
+                <td>
+                  <%= link_to 'Change admin status', edit_project_member_path(@project, member), class:"btn btn-outline-primary" %>
                   <%= link_to 'Destroy Member', [@project, member], class:"btn btn-outline-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
                 </td>
               </tr>
@@ -32,8 +39,7 @@
         </table>
 
         <br>
-
-        <%= link_to 'New Member', new_project_member_path(@project), class:"btn btn-primary" %>
+        <%= link_to 'Back', [@project], class:"btn btn-outline-primary" %>
       </div>
     </div>
   </div>

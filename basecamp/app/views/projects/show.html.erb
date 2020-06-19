@@ -27,23 +27,21 @@
             <% end %>
             <div class="project-members-list-wrap">
               <% @members.each do |member| %>
-                <%= link_to edit_project_member_path(@project, member) do %>
-                  <div class="project-member-info">
-                    <p><%= member.name %></p>
-                    <p><%= member.email %></p>
-                    <% if member.is_admin %>
-                      <i class="fa fa-star"></i>
-                    <% end %>
-                  </div>
-                <% end %>
+                <div class="project-member-info">
+                  <p><%= member.name %></p>
+                  <p><%= member.email %></p>
+                  <% if member.is_admin %>
+                    <i class="fa fa-star"></i>
+                  <% end %>
+                </div>
               <% end %>
             </div>
           </div>
           <% if @activeMember && @activeMember.is_admin ||
               current_user.id == @project.user.id %>
-            <%= link_to new_project_member_path(@project), class: 'btn' do %>
+            <%= link_to project_members_path(@project, @members), class: 'btn' do %>
               <button type="button" class="btn btn-primary" aria-label="Center Align">
-                Add new member
+                Add / Remove member
               </button>
             <% end %>
           <% end %>
