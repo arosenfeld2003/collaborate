@@ -78,6 +78,9 @@
                             <p class="member-email">
                               <%= member.email %>
                             </p>
+                            <% if member.is_admin %>
+                              <i class="fa fa-star"></i>
+                            <% end %>
                           </div>
                         <% end %>
                       <% end %>

@@ -38,8 +38,13 @@
 
 .members-list-details {
   display: flex;
+  align-items: center;
 
   &:hover {
     color: #6c757d;
+  }
+
+  .fa {
+    color: orange;
   }
 }
