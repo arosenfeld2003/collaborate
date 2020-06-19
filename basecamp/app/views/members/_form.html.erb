@@ -11,15 +11,19 @@
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= form.label :name, class:"control-label" %>
-    <%= form.text_field :name, class:"form-control" %>
-  </div>
+  <% if member.new_record? %>
+    <div class="form-group">
+      <%= form.label :name, class:"control-label"%>
+      <%= form.text_field :name, class:"form-control" %>
+    </div>
+  <% end %>
 
-  <div class="form-group">
-    <%= form.label :email, class:"control-label" %>
-    <%= form.text_field :email, class:"form-control" %>
-  </div>
+  <% if member.new_record? %>
+    <div class="form-group">
+      <%= form.label :email, class:"control-label" %>
+      <%= form.text_field :email, class:"form-control" %>
+    </div>
+  <% end %>
 
   <div class="form-group">
     <%= form.label "Admin" %>

@@ -15,6 +15,11 @@
   h2 {
     margin-bottom: 30px;
   }
+
+  .members-notice {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
 }
 
 .members-table {
@@ -39,10 +44,6 @@
 .members-list-details {
   display: flex;
   align-items: center;
-
-  &:hover {
-    color: #6c757d;
-  }
 
   .fa {
     color: orange;
