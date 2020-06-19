@@ -54,6 +54,7 @@
             <% if @activeMember && @activeMember.is_admin ||
                 current_user.id == @project.user.id %>
               <%= link_to 'Edit Project', edit_project_path(@project), class:"btn btn-primary" %>
+              <%= link_to 'Edit Members', project_members_path(@project), class:"btn btn-primary" %>
               <%= link_to 'Destroy Project', @project, method: :delete, class:"btn btn-outline-danger", data: { confirm: 'Are you sure?' } %>
             <% end %>
           </div>
