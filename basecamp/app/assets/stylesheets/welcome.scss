@@ -190,3 +190,18 @@
 .table-wrap.hide {
   display: none;
 }
+
+@import "bootstrap";
+
+.welcome {
+  text-align: center;
+  height: 100vh;
+}
+
+.form {
+  height: 100vh;
+}
+
+.centered {
+  text-align: center;
+}

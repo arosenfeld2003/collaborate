@@ -14,10 +14,7 @@ class ProjectsController < ApplicationController
   def index
     if user_signed_in?
       @projectsByOwner = Project.where(:user => current_user)
-      @projectsByMember = Member.where(:email => current_user.email).map do |elem|
-        elem.project.member = elem
-        elem.project
-      end
+      @projectsByMember = Member.find_by_email
       @projects = concatProjects(@projectsByOwner.to_a, @projectsByMember.to_a)
     end
   end

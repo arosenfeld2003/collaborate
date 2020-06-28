@@ -12,6 +12,7 @@
 
   <body>
     <div class="container">
+      <% if user_signed_in? %>
       <header class="main-header">
         <div class="row">
           <div class="col-md-4">
@@ -37,6 +38,7 @@
           </div>
         </div>
       </header>
+      <% end %>
     </div>
     <%= yield %>
   </body>

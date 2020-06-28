@@ -1,29 +1,13 @@
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <div class="context">
-        <h2>Welcome!</h2>
-        <p>
-          Manage multiple projects at once, wherever you are.
-          Puts everything you need to get work done in one place!
-        </p>
+<main>
+  <div class="container welcome">
+      <div class="row h-100">
+        <div class="col align-self-center">
+          <div class="w-25 m-auto"><%= svg 'logo'%></div>
+          <h1 class="display-2 font-weight-bold text-dark">Collaborate easily</h1>
+          <h5 class="lead">Best collaboration tool for developers [not their managers]</h5>
+          <%= link_to "Sign up", new_user_registration_path, :class => 'btn btn-info m-5 btn-lg', :method => :get  %>
+          <%= link_to "Login", new_user_session_path, :class => 'btn btn-info m-5 btn-lg', :method => :get  %>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-
-
-<div class="area" >
-  <ul class="circles">
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-  </ul>
-</div >
+</main>
