@@ -8,38 +8,44 @@
     <%= stylesheet_link_tag "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script>
+   $('.dropdown-toggle').dropdown()
+</script>
   </head>
 
   <body>
-    <div class="container">
       <% if user_signed_in? %>
-      <header class="main-header">
-        <div class="row">
-          <div class="col-md-4">
-            <%= link_to root_path, class:"page-header" do %>
-              <h1>MyBasecamp</h1>
-            <% end  %>
-          </div>
-          <div class="col-md-8 ml-auto align-right">
-            <% if user_signed_in? %>
-              <div class="user-info">
-                <div class="user-info-email">Welcome <%= current_user.name %></div>
-                <div class="btn-group sign-buttons">
-                  <%= link_to "Edit account", edit_user_registration_path, method: :get, class:"btn btn-primary" %>
-                  <%= link_to "Log Out", destroy_user_session_path, method: :delete, class:"btn btn-primary" %>
-                </div>
-              </div>
-            <% else %>
-              <div class="btn-group sign-buttons">
-                <%= link_to "Sign In", new_user_session_path, class:"btn btn-primary" %>
-                <%= link_to "Sign up", new_user_registration_path, class:"btn btn-primary"%>
-              </div>
+      <nav class="navbar  navbar-light px-4 align-items-end">
+        <%= link_to root_path, class: "navbar-brand text-info", id: "nav_svg" do %>
+            <%= svg 'logo'%>
+            <div class="font-weight-bold navbar_text text-dark d-inline">MyBaseCamp</div>
+        <% end %>
+
+        <ul class="nav">
+          <li class="nav-item">
+            <%= link_to new_project_path, class:"btn btn-sm btn-outline-info nav-link" do %>
+              <%= svg 'add_project'%>
+              Add Project
             <% end %>
-          </div>
-        </div>
-      </header>
+          </li>
+
+          <li class="nav-item">
+            <%= link_to edit_user_registration_path, class:"btn btn-sm btn-outline-info nav-link" do %>
+              <%= svg 'edit'%>
+              Edit Profile
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to destroy_user_session_path, method: :delete, class:"btn btn-sm btn-outline-info nav-link" do %>
+              <%= svg 'log_out'%>
+              Log output
+            <% end %>
+          </li>
+        </ul>
+      </nav>
       <% end %>
-    </div>
+
+
     <%= yield %>
   </body>
 </html>
