@@ -11,7 +11,6 @@ class ProjectsController < ApplicationController
   end
 
   def index
-    p user_signed_in?
     if user_signed_in?
       @projectsByOwner = Project.find_by_owner(current_user)
       @projectsByMember = Member.find_by_email(current_user)

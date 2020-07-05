@@ -27,9 +27,11 @@
         <div class="card-footer border-light">
           <div class="text-right">
             <% if !project.is_owner %>
-              <%= link_to 'Unsubsciribe', project_member_unsubscribe_path(project, project.member), :class => 'btn btn-outline-danger  btn-sm',
-                      method: delete,
-                     data: { confirm: 'Are you sure you want to Unsubsciribe from this project?' } %>
+              <%= link_to project_member_unsubscribe_path(project, project.member), :class => 'btn btn-danger  btn-sm',
+                     method: :delete,
+                     data: { confirm: 'Are you sure you want to Unsubsciribe from this project?' } do %>
+                     <% svg 'log_out' %>
+              <% end %>
             <% else %>
               <%= link_to project_path(project), :class => 'btn btn-danger  btn-sm',
                     method: :delete,

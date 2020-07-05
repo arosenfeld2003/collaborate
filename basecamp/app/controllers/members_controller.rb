@@ -26,14 +26,13 @@ class MembersController < ApplicationController
   # POST /members.json
   def create
     @member = @project.members.build(member_params)
-
     respond_to do |format|
-      if @member.save
-        format.html { redirect_to edit_project_path(@project), notice: 'Member was successfully created.' }
-        format.json { render :show, status: :created, location: @member }
+      if @member.email == current_user.email
+        format.html { redirect_to edit_project_path(@project), notice: "You are already a member of this project"}
+      elsif @member.save
+        format.html { redirect_to edit_project_path(@project)}
       else
-        format.html { render :new }
-        format.json { render json: @member.errors, status: :unprocessable_entity }
+        format.html { redirect_to edit_project_path(@project), notice: @member.errors.full_messages[0]  }
       end
     end
   end
@@ -43,7 +42,7 @@ class MembersController < ApplicationController
   def update
     respond_to do |format|
       if @member.update(:is_admin => !@member.is_admin)
-        format.html { redirect_to edit_project_path(@project), notice: 'Member was successfully updated.' }
+        format.html { redirect_to edit_project_path(@project)}
         format.json { render :show, status: :ok, location: @member }
       else
         format.html { render :edit }
@@ -67,7 +66,7 @@ class MembersController < ApplicationController
   def destroy
     @member.destroy
     respond_to do |format|
-      format.html { redirect_to edit_project_path(@project), notice: 'Member was successfully destroyed.' }
+      format.html { redirect_to edit_project_path(@project) }
       format.json { head :no_content }
     end
   end
@@ -78,8 +77,6 @@ class MembersController < ApplicationController
     end
     # Use callbacks to share common setup or constraints between actions.
     def set_member
-      p @project
-      p params
       @member = @project.members.find(params[:id])
     end
 
