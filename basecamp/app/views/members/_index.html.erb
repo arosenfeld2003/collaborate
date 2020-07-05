@@ -1,0 +1,13 @@
+<% if members.length > 0 %>
+  <p class="my-0">
+    <small class="text-muted">Members:</small></p>
+    <% members.each do |member| %>
+      <p class="my-0">
+        <%= svg 'person' %>
+        <small><%= member.email %></small>
+        <% if member.is_admin == true %>
+          <%= svg 'admin' %>
+        <% end %>
+      </p>
+    <% end %>
+<% end %>

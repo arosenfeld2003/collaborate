@@ -29,7 +29,7 @@ class MembersController < ApplicationController
 
     respond_to do |format|
       if @member.save
-        format.html { redirect_to project_members_path(@project), notice: 'Member was successfully created.' }
+        format.html { redirect_to edit_project_path(@project), notice: 'Member was successfully created.' }
         format.json { render :show, status: :created, location: @member }
       else
         format.html { render :new }
@@ -42,8 +42,8 @@ class MembersController < ApplicationController
   # PATCH/PUT /members/1.json
   def update
     respond_to do |format|
-      if @member.update(member_params)
-        format.html { redirect_to project_members_path(@project), notice: 'Member was successfully updated.' }
+      if @member.update(:is_admin => !@member.is_admin)
+        format.html { redirect_to edit_project_path(@project), notice: 'Member was successfully updated.' }
         format.json { render :show, status: :ok, location: @member }
       else
         format.html { render :edit }
@@ -67,7 +67,7 @@ class MembersController < ApplicationController
   def destroy
     @member.destroy
     respond_to do |format|
-      format.html { redirect_to project_members_path(@project), notice: 'Member was successfully destroyed.' }
+      format.html { redirect_to edit_project_path(@project), notice: 'Member was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -78,11 +78,13 @@ class MembersController < ApplicationController
     end
     # Use callbacks to share common setup or constraints between actions.
     def set_member
+      p @project
+      p params
       @member = @project.members.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def member_params
-      params.require(:member).permit(:name, :email, :project_id, :is_admin)
+      params.require(:member).permit(:email, :is_admin)
     end
 end

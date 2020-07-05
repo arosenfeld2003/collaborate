@@ -1,27 +1,7 @@
-<%= form_with(model: project, local: true, class: "form-horizontal") do |form| %>
-  <% if project.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
-
-      <ul>
-        <% project.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<%= bootstrap_form_for(@project, local: true) do |form| %>
+    <%= form.text_field :name, label_class: "text-muted" %>
+    <%= form.text_area :description, label_class: "text-muted" %>
+    <div class="centered mt-5">
+      <%= form.submit %>
     </div>
-  <% end %>
-
-  <div class="form-group">
-    <%= form.label :name, class:"control-label" %>
-    <%= form.text_field :name, required:true, class:"form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :description, class:"control-label" %>
-    <%= form.text_area :description, class:"form-control" %>
-  </div>
-
-  <div class="form-group project-submit-btn">
-    <%= form.submit %>
-  </div>
 <% end %>

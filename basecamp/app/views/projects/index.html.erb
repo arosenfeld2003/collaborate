@@ -1,95 +1,20 @@
-<div class="container">
-  <div class="row">
-    <div class="col-6">
-      <div class="table">
-        <div class="table-row header">
-          <div class="table-header">
-            <h2>Projects</h2>
-          </div>
-          <div class="project-add-new">
-            <%= link_to new_project_path, class: 'btn' do %>
-              <button type="button" class="btn btn-primary" aria-label="Center Align">
-                Add new project
-              </button>
-            <% end %>
-          </div>
-        </div>
-        <div class="projects-filter">
-          <div class="btn-group btn-group-toggle" data-toggle="buttons">
-            <div id="all" class="btn btn-outline-primary btn-sm projects-filter-btn">All</div>
-            <div id="owner" class="btn btn-outline-primary btn-sm projects-filter-btn">Owner</div>
-            <div id="member" class="btn btn-outline-primary btn-sm projects-filter-btn">Member</div>
-          </div>
-        </div>
+  <main>
+    <div class="container">
+      <div class="row my-3 justify-content-center">
+            <h2 class="centered">Projects</h2>
       </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-12">
-      <div class="row table-wrap">
-        <% classification = '' %>
-        <% @projects.each do |project| %>
-          <% if @projectsByOwner.include?(project) %>
-            <% classification = 'owner' %>
-          <% elsif @projectsByMember.include?(project) %>
-            <% classification = 'member' %>
-          <% end %>
-          <div class = "<%= "#{classification} col-4"  %>" >
-            <div class="table-row">
-              <div class="project">
-                <div class="project-header-wrap">
-                  <div class="project-header">
-                    <p class="title is-4">
-                      <%= link_to project.name, project, class: 'project-name' %>
-                    </p>
-                    <p class="project-creator">
-                      <% if project.user %>
-                        Created by: <%= project.user.name %>
-                      <% else %>
-                        Project creator has canceled their account!
-                      <% end %>
-                    </p>
-                  </div>
-                  <% if project.member %>
-                    <%= link_to 'Unsubscribe', project_member_unsubscribe_path(project, project.member),
-                    :method => :delete, class:"btn btn-outline-danger",
-                           data: { confirm: 'Are you sure you want to Unsubsciribe from this project?' } %>
-                  <% end %>
-                </div>
-                <div class="project-content">
-                  <p class="project-description">
-                    <%= project.description %>
-                  </p>
-                </div>
-                <div class="members">
-                  <% if project.members.first %>
-                    <div class="members-title">
-                      Members:
-                    </div>
-                  <% end %>
-                  <div class="members-list">
-                    <% project.members.each do |member| %>
-                      <% if member.project_id == project.id %>
-                        <div class="members-list-details">
-                          <p class="member-name">
-                            <%= member.name %>
-                          </p>
-                          <p class="member-email">
-                            <%= member.email %>
-                          </p>
-                          <% if member.is_admin %>
-                            <i class="fa fa-star"></i>
-                          <% end %>
-                        </div>
-                      <% end %>
-                    <% end %>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+      <div class="projects-filter row justify-content-around">
+          <div id="all" class="col-3 btn btn btn-outline-secondary btn-sm projects-filter-btn">
+            <%= svg 'all' %>All projects</div>
+          <div id="owner" class="col-3 btn btn btn-outline-secondary btn-sm projects-filter-btn">
+            <%= svg 'creator' %>Created by me</div>
+          <div id="member" class="col-3 btn btn btn-outline-secondary btn-sm projects-filter-btn">
+            <%= svg 'member' %>Shared with me</div>
+      </div>
+      <div class="row mt-5">
+        <%if @projects %>
+          <%= render :partial => 'list', :object => @projects, as: 'projects' %>
         <% end %>
       </div>
     </div>
-  </div>
-</div>
+</main>

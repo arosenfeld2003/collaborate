@@ -1,0 +1,30 @@
+<% if members.length > 0 %>
+  <p class="my-0 text-muted">Members:</p>
+  <% members.each do |member| %>
+    <div class="row">
+      <div class="col-1 p-0  text-right">
+        <% if member.is_admin == true %>
+          <%= svg 'admin' %>
+        <% end %>
+        <%= svg 'person' %>
+      </div>
+      <div class="col-3 text-truncate"><small><%= member.email %></small></div>
+      <div class="col-4 text-right">
+        <% if member.is_admin == true %>
+          <%= link_to 'Remove Admin Role', [member.project, member], :class => 'btn btn-outline-dark  btn-sm',
+                method: :put
+          %>
+        <% else %>
+          <%= link_to 'Add Admin Role', [member.project, member], :class => 'btn btn-outline-dark  btn-sm',
+                method: :put
+          %>
+        <% end %>
+      <%= link_to [member.project, member], :class => 'btn btn-danger  btn-sm',
+            method: :delete,
+            data: { confirm: 'Are you sure you want to delete this member?' } do %>
+            <%= svg 'delete' %>
+      <% end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

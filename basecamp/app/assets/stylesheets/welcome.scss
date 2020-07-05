@@ -217,3 +217,16 @@
 .btn-outline-info {
   border: none;
 }
+
+.btn-outline-secondary, .btn-outline-dark {
+  border: none;
+  background-color: rgba(0,0,0,0.03);
+}
+
+.update_btn {
+  margin-bottom: 1rem;
+}
+
+.custom-switch input:checked ~ .custom-control-input {
+  background-color: yellow !important;
+}

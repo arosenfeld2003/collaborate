@@ -7,13 +7,13 @@ class ProjectsController < ApplicationController
 
   def concatProjects(array1, array2)
     projectsAll = array1.concat(array2)
-
     return projectsAll
   end
 
   def index
+    p user_signed_in?
     if user_signed_in?
-      @projectsByOwner = Project.where(:user => current_user)
+      @projectsByOwner = Project.find_by_owner(current_user)
       @projectsByMember = Member.find_by_email(current_user)
       @projects = concatProjects(@projectsByOwner.to_a, @projectsByMember.to_a)
     end
@@ -22,14 +22,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
-    @members = Member.where("project_id=?", params[:id])
-    if @members
-      @members.each do |member|
-        if member.email == current_user.email
-          @activeMember = member
-        end
-      end
-    end
+    @project.owner = @project.user.name
   end
 
   # GET /projects/new
@@ -39,6 +32,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
+    @project.owner = @project.user.name
   end
 
   # POST /projects

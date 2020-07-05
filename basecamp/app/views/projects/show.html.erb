@@ -1,61 +1,24 @@
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-      <div class="project-show">
-
-        <h2 class="project-show-name"><%= @project.name %></h2>
-
-        <div class="project-creator">
-          <% if @project.user %>
-            Project Created by: <%= @project.user.name %>
-          <% else %>
-            Project creator has canceled their account!
-          <% end %>
-        </div>
-
-        <div class="project-show-description">
-          <p><%= @project.description %></p>
-        </div>
-
-        <div class="project-members">
-
-          <div class="project-members-list">
-            <% if @project.members.first %>
-              <div class="project-members-title">
-                Members:
-              </div>
+<main>
+  <div class="container form">
+    <div class="row h-100 justify-content-center">
+      <div class="col-9 mt-4">
+        <%= link_to edit_project_path(@project) do %><h2 class="centered"><%= @project.name %></h2><% end %>
+          <p class="text-muted centered""><small><%= svg 'creator' %>Created by: <%= @project.owner %></small></p>
+          <p class="my-3"><%= @project.description %></p>
+          <%= render :partial => 'members/index', :object => @project.members, as: 'members' %>
+          <div class="centered my-3 ">
+            <%= link_to edit_project_path(@project), class: "btn btn-info" do %>
+              <%= svg 'edit' %>
+              Edit Project
             <% end %>
-            <div class="project-members-list-wrap">
-              <% @members.each do |member| %>
-                <div class="project-member-info">
-                  <p><%= member.name %></p>
-                  <p><%= member.email %></p>
-                  <% if member.is_admin %>
-                    <i class="fa fa-star"></i>
-                  <% end %>
-                </div>
-              <% end %>
-            </div>
           </div>
-          <% if @activeMember && @activeMember.is_admin ||
-              current_user.id == @project.user.id %>
-            <%= link_to project_members_path(@project, @members), class: 'btn' do %>
-              <button type="button" class="btn btn-primary" aria-label="Center Align">
-                Edit members
-              </button>
-            <% end %>
-          <% end %>
-        </div>
-
-          <div class="project-btn-wrap">
-            <%= link_to 'Back', projects_path, class:"btn btn-outline-primary"  %>
-            <% if @activeMember && @activeMember.is_admin ||
-                current_user.id == @project.user.id %>
-              <%= link_to 'Edit Project', edit_project_path(@project), class:"btn btn-primary" %>
-              <%= link_to 'Destroy Project', @project, method: :delete, class:"btn btn-outline-danger", data: { confirm: 'Are you sure?' } %>
+          <div class="centered my-3 fixed-bottom">
+            <%= link_to project_path(@project),data: { confirm: "Are you sure you want to delete this project?" }, method: :delete, class: "text-muted" do %>
+              <%= svg 'delete' %>
+              Delete Project
             <% end %>
           </div>
       </div>
     </div>
   </div>
-</div>
+</main>
