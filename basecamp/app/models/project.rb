@@ -6,6 +6,8 @@ class Project < ApplicationRecord
   belongs_to :user
   has_many :members, dependent: :destroy
 
+  has_many_attached :attachments
+
   def self.find_by_owner(current_user)
     result = where(:user => current_user)
 

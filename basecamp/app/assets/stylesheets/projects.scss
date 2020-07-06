@@ -134,3 +134,48 @@
   justify-content: space-between;
   align-items: flex-start;
 }
+
+.projects-attach {
+  img {
+    max-width: 100px;
+    height: auto;
+  }
+
+  .fa {
+    color: #6c757d;
+  }
+
+  .text-muted {
+    margin-bottom: 10px;
+  }
+}
+.projects-attach-item {
+  margin-bottom: 8px;
+
+  .fa {
+    margin-right: 5px;
+  }
+}
+
+.form-attach {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 20px;
+
+  .project-submit-btn {
+    margin-bottom: 0;
+  }
+}
+
+.attach-form {
+  margin-top: 10px;
+  label {
+    display: block;
+  }
+}
+
+.button-attach {
+  border: none;
+  color: #17a2b8;
+  background-color: transparent;
+}

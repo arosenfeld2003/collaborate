@@ -56,7 +56,7 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @project.update(project_params)
-        format.html { redirect_to @project, notice: 'Project was successfully updated.' }
+        format.html { redirect_to edit_project_path(@project), notice: 'Project was successfully updated.' }
         format.json { render :show, status: :ok, location: @project }
       else
         format.html { render :edit }
@@ -75,6 +75,13 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def delete_attachment
+    @project_attachment = ActiveStorage::Attachment.find(params[:id])
+    @project_attachment.purge_later
+    # Q: how come @project = nil here ??
+    redirect_back(fallback_location: root_path)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project
@@ -83,6 +90,11 @@ class ProjectsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def project_params
-      params.require(:project).permit(:name, :description, :member_id)
+      params.require(:project).permit(
+        :name,
+        :description,
+        :member_id,
+        attachments: [],
+        attachments_attachment_attributes: [:id])
     end
 end
