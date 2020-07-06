@@ -1,2 +1,0 @@
-class ThreadsController < ApplicationController
-end

@@ -1,0 +1,13 @@
+<% if topics && topics.length %>
+  <div class="row">
+    <% topics.each do |topic| %>
+      <div class="col-6">
+        <div class="card">
+            <div class="card-header bg-dark text-white ">
+                <small><%= topic.title %></small>
+            </div>
+          </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
