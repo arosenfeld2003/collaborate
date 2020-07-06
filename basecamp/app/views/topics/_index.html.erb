@@ -1,13 +1,33 @@
-<% if topics && topics.length %>
+<% if @project.topics.length %>
   <div class="row">
-    <% topics.each do |topic| %>
-      <div class="col-6">
-        <div class="card">
-            <div class="card-header bg-dark text-white ">
-                <small><%= topic.title %></small>
+    <% @project.topics.each do |topic| %>
+      <% if topic.id %>
+        <div class="col-6 mb-4">
+          <div class="card border-info">
+              <div class="card-header">
+                <div class="row">
+                  <div class="col mr-auto">
+                    <small><%= topic.title %></small>
+                  </div>
+                  <% if @project.is_admin %>
+                    <div class="col-auto">
+                      <%= link_to edit_project_topic_path(@project, topic), class: "mr-1" do %>
+                        <%= svg 'edit' %>
+                      <% end %>
+                      <%= link_to project_topic_path(@project, topic), method: :delete do %>
+                        <%= svg 'delete' %>
+                      <% end %>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+              <div class="card-body"></div>
+              <div class="card-footer pb-0">
+                <%= render :partial => 'messages/new', :locals => { :project => @project, :topic => topic, :message => topic.messages.build } %>
+              </div>
             </div>
-          </div>
-      </div>
+        </div>
+      <% end %>
     <% end %>
   </div>
 <% end %>

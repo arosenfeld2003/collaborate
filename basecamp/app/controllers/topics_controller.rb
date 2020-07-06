@@ -1,5 +1,6 @@
 class TopicsController < ApplicationController
   before_action :get_project
+  before_action :set_topic, only: [:show, :edit, :update, :destroy]
 
   def new
     @topic = @project.topics.build
@@ -12,8 +13,8 @@ class TopicsController < ApplicationController
   def show
   end
 
-  # GET /members/1/edit -> projects/project_id/members/1/edit
   def edit
+    redirect_to @project unless @project.is_admin
   end
 
   def create
@@ -23,34 +24,38 @@ class TopicsController < ApplicationController
       if @topic.save
         format.html { redirect_to project_path(@project)}
       else
-        format.html { redirect_to project_path(@project), notice: @topic.errors.full_messages[0]  }
+        format.html { redirect_to project_path(@project), alert: @topic.errors.full_messages[0]  }
       end
     end
   end
 
   def update
     respond_to do |format|
-      if @member.update(:is_admin => !@member.is_admin)
-        format.html { redirect_to edit_project_path(@project)}
-        format.json { render :show, status: :ok, location: @member }
+      if @topic.update(topic_params)
+        format.html { redirect_to project_path(@project)}
       else
         format.html { render :edit }
-        format.json { render json: @member.errors, status: :unprocessable_entity }
+        format.json { render json: @topic.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def destroy
-    @member.destroy
+    @topic.destroy
     respond_to do |format|
-      format.html { redirect_to show_project_path(@project) }
+      format.html { redirect_to project_path(@project) }
       format.json { head :no_content }
     end
   end
 
   private
+    def set_topic
+      @topic = Topic.find(params[:id])
+    end
+
     def get_project
       @project = Project.find(params[:project_id])
+      @project.is_admin = Project.role(current_user, @project)
     end
 
     def topic_params

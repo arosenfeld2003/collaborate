@@ -9,7 +9,7 @@
           <% if @project.is_admin %>
             <%= render :partial => 'topics/new', :object => @project.topics.build, as: 'topic' %>
           <% end %>
-          <%= render :partial => 'topics/index', :object => @project.topics, as: 'topics' %>
+          <%= render :partial => 'topics/index', :object => @project %>
           <% if @project.is_admin %>
             <div class="centered my-3 fixed-bottom">
               <%= link_to edit_project_path(@project), class: "btn btn-info mx-3" do %>

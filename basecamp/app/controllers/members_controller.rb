@@ -28,11 +28,11 @@ class MembersController < ApplicationController
     @member = @project.members.build(member_params)
     respond_to do |format|
       if @member.email == current_user.email
-        format.html { redirect_to edit_project_path(@project), notice: "You are already a member of this project"}
+        format.html { redirect_to edit_project_path(@project), alert: "You are already a member of this project"}
       elsif @member.save
         format.html { redirect_to edit_project_path(@project)}
       else
-        format.html { redirect_to edit_project_path(@project), notice: @member.errors.full_messages[0]  }
+        format.html { redirect_to edit_project_path(@project), alert: @member.errors.full_messages[0]  }
       end
     end
   end
