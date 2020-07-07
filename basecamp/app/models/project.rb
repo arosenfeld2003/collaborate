@@ -14,6 +14,8 @@ class Project < ApplicationRecord
     return Member.where(:email => current_user.email, :project => project)[0].is_admin
   end
 
+  has_many_attached :attachments
+
   def self.find_by_owner(current_user)
     result = where(:user => current_user)
 
