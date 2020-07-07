@@ -54,4 +54,3 @@ gem "bootstrap_form", "~> 4.0"
 gem 'devise'
 gem 'listen', '~> 3.0'
 gem 'popper_js', '~> 1.11'
-gem 'wdm', '>= 0.1.0'
