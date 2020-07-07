@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     resources :members do
       delete 'unsubscribe'
     end
-    resources :threads do
+    resources :topics do
       resources :messages
     end
   end

@@ -21,7 +21,6 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
-    @project.owner = @project.user.name
   end
 
   # GET /projects/new
@@ -31,7 +30,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
-    @project.owner = @project.user.name
+    redirect_to @project unless @project.is_admin
   end
 
   # POST /projects
@@ -86,6 +85,8 @@ class ProjectsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_project
       @project = Project.find(params[:id])
+      @project.owner = @project.user.name
+      @project.is_admin = Project.role(current_user, @project)
     end
 
     # Only allow a list of trusted parameters through.

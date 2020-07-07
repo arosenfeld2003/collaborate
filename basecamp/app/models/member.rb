@@ -5,7 +5,6 @@ class Member < ApplicationRecord
   belongs_to :project
 
   def self.find_by_email(user)
-    p user
     projects = Member.where(:email => user.email).map do |elem|
       elem.project.member = elem
       elem.project.css_class = "member"
