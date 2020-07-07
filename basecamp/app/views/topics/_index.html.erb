@@ -1,13 +1,13 @@
 <% if @project.topics.length %>
-  <div class="row">
+  <div class="row mt-4">
     <% @project.topics.each do |topic| %>
       <% if topic.id %>
         <div class="col-6 mb-4">
-          <div class="card border-info">
+          <div class="card border-info topic">
               <div class="card-header">
                 <div class="row">
-                  <div class="col mr-auto">
-                    <small><%= topic.title %></small>
+                  <div class="col mr-auto font-weight-bolder text-dark">
+                    <%= topic.title %>
                   </div>
                   <% if @project.is_admin %>
                     <div class="col-auto">
@@ -21,7 +21,9 @@
                   <% end %>
                 </div>
               </div>
-              <div class="card-body"></div>
+              <div class="card-body overflow-auto">
+                <%= render :partial => 'messages/index', :locals => { :project => @project, :topic => topic, :messages => Message.list(topic, current_user.id) } %>
+              </div>
               <div class="card-footer pb-0">
                 <%= render :partial => 'messages/new', :locals => { :project => @project, :topic => topic, :message => topic.messages.build } %>
               </div>

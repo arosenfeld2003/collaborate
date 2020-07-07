@@ -227,6 +227,18 @@
   margin-bottom: 1rem;
 }
 
-.custom-switch input:checked ~ .custom-control-input {
-  background-color: yellow !important;
+.topic {
+  max-height: 30vh;
+}
+
+.admin_edit_messages {
+  max-height: 60vh;
+}
+
+.message:hover {
+  background: rgba(0, 162, 183, 0.1);
+}
+
+.project_card {
+ max-height: 40vh;
 }

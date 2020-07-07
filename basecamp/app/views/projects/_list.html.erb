@@ -1,7 +1,7 @@
 
 <% projects.each do |project| %>
     <div class = "<%= "#{project.css_class} col-4 mb-4"  %>" >
-      <div class="card">
+      <div class="card project_card">
           <div class="card-header bg-dark text-white ">
             <div class="row">
               <div class="col mr-auto">
@@ -19,7 +19,7 @@
               </div>
             </div>
           </div>
-        <div class="card-body">
+        <div class="card-body overflow-auto">
           <p class="card-text"><%= project.description %></p>
           <%= render :partial => 'members/index', :object => project.members, as: 'members' %>
         </div>

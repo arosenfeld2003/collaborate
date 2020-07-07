@@ -2,7 +2,7 @@
   <div class="row my-0">
     <div class="col pr-0"><%= f.text_field :text, require: true, hide_label: true %>
   </div>
-    <div class="col-auto align-self-end update_btn"><%= f.primary "+#{svg 'chat'}".html_safe, render_as_button: true, class:  'btn btn-warning'%></div>
+    <div class="col-auto align-self-end update_btn"><%= f.primary "Send".html_safe, render_as_button: true, class:  'btn btn-warning'%></div>
   </div>
   <% flash.each do |type, msg| %>
     <% if type == 'alert' %>

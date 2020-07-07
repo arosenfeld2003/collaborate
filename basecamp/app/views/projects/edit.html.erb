@@ -17,17 +17,17 @@
           <% end %>
           <%= render :partial => 'members/edit', :object => @project.members, as: 'members' %>
           <%= render :partial => 'members/new', :object => @project.members.build, as: 'member' %>
-          <div class="centered my-3 fixed-bottom">
-            <%= link_to project_path(@project), class: "btn btn-info mx-3" do %>
-              <%= svg 'overview' %>
-              Project Overview
-            <% end %>
-            <%= link_to project_path(@project),data: { confirm: "Are you sure you want to delete this project?" }, method: :delete, class: "text-muted mx-3" do %>
-              <%= svg 'delete' %>
-              Delete Project
-            <% end %>
-          </div>
       </div>
+    </div>
+    <div class="centered my-3 fixed-bottom">
+      <%= link_to project_path(@project), class: "btn btn-info mx-3" do %>
+        <%= svg 'overview' %>
+        Project Overview
+      <% end %>
+      <%= link_to project_path(@project),data: { confirm: "Are you sure you want to delete this project?" }, method: :delete, class: "text-muted mx-3" do %>
+        <%= svg 'delete' %>
+        Delete Project
+      <% end %>
     </div>
   </div>
 </main>
