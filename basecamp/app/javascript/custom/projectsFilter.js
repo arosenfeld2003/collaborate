@@ -21,15 +21,26 @@ document.addEventListener('turbolinks:load', function() {
 }, false);
 
 document.addEventListener('turbolinks:load', function() {
-  var fileInput = document.querySelector('.custom-file-input');
-  var fileLabel = document.querySelector('.custom-file-label');
+  var fileInput = document.querySelector(".custom-file-input");
+  var fileLabel = document.querySelector(".custom-file-label");
 
   fileInput.addEventListener("change", (e) => {
-    if (e.path[0].files.length == 1)
-      fileLabel.textContent = e.target.value.replace(/^.*[\\\/]/, '');
-    else {
-      fileLabel.textContent = e.path[0].files.length + " files"
+    if (navigator.userAgent.indexOf("Firefox") !== -1) {
+      if (e.originalTarget.files.length == 1) {
+        fileLabel.textContent = e.originalTarget.files[0].name; }
+      else if (e.originalTarget.files.length > 1) {
+        fileLabel.textContent = e.originalTarget.files.length + " files";
+      } else {
+        fileLabel.textContent = "No file chosen"
+      }
+    } else {
+      if (e.path[0].files.length == 1)
+        fileLabel.textContent = e.path[0].files[0].name;
+      else if (e.path[0].files.length > 1) {
+        fileLabel.textContent = e.path[0].files.length + " files"
+      } else {
+        fileLabel.textContent = "No file chosen"
+      }
     }
-      console.log(e.path[0].files);
    });
 }, false);
