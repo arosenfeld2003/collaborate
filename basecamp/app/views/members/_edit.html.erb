@@ -5,8 +5,9 @@
       <div class="col-1 p-0  text-right">
         <% if member.is_admin == true %>
           <%= svg 'admin' %>
+        <% else %>
+          <%= svg 'person' %>
         <% end %>
-        <%= svg 'person' %>
       </div>
       <div class="col-3 text-truncate"><small><%= member.email %></small></div>
       <div class="col-4 text-right">

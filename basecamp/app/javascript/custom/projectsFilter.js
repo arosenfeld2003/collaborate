@@ -19,3 +19,17 @@ document.addEventListener('turbolinks:load', function() {
     })
   })
 }, false);
+
+document.addEventListener('turbolinks:load', function() {
+  var fileInput = document.querySelector('.custom-file-input');
+  var fileLabel = document.querySelector('.custom-file-label');
+
+  fileInput.addEventListener("change", (e) => {
+    if (e.path[0].files.length == 1)
+      fileLabel.textContent = e.target.value.replace(/^.*[\\\/]/, '');
+    else {
+      fileLabel.textContent = e.path[0].files.length + " files"
+    }
+      console.log(e.path[0].files);
+   });
+}, false);

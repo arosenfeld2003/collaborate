@@ -3,49 +3,19 @@
     <div class="row h-100 justify-content-center">
       <div class="col-9 mt-4">
         <%= link_to edit_project_path(@project) do %><h2 class="centered"><%= @project.name %></h2><% end %>
-          <p class="text-muted centered""><small><%= svg 'creator' %>Created by: <%= @project.owner %></small></p>
-          <p class="my-3"><%= @project.description %></p>
+        <p class="text-muted centered"><small><%= svg 'creator' %>Created by: <%= @project.owner %></small></p>
+        <p class="my-3"><%= @project.description %></p>
+        <p class="text-muted">Members:</p>
+        <div class="row">
+          <div class="col py-1"><%= svg 'creator' %><small><%= @project.owner %></small></div>
           <%= render :partial => 'members/index', :object => @project.members, as: 'members' %>
-          <% if @project.is_admin %>
-            <%= render :partial => 'topics/new', :object => @project.topics.build, as: 'topic' %>
-          <% end %>
-          <%= render :partial => 'topics/index', :object => @project %>
-          <div class="attach-form">
-            <%= form_with(model: @project, local: true, class: "form-attach") do |form| %>
-              <div class="attach-form">
-                <%= form.label :attachments, 'Add files/docs', for:"FormControlFile1", class: "text-muted" %>
-                <%= form.file_field :attachments, multiple: true, id:"FormControlFile1", class:"attach-form-control-file" %>
-              </div>
-              <div class="form-group project-submit-btn">
-                <%= button_tag( :class => "btn btn-warning" ) do %>
-                  <i class="fa fa-download"></i>
-                <% end %>
-              </div>
-            <% end %>
-            <div class="projects-attach">
-            <% if @project.attachments.attached? %>
-                <p class="text-muted"> Attachments:</p>
-                <% @project.attachments.each do |file| %>
-                  <div class="projects-attach-item">
-                    <%= link_to delete_attachment_project_url(file.id),
-                      method: :delete,
-                      data: { confirm: 'Are you sure?' },
-                      class: 'btn btn-danger  btn-sm' do %>
-                      <%= svg 'delete' %>
-                    <% end %>
-                    <% if file.previewable? %>
-                      <%= link_to(image_tag(file.preview(resize_to_limit: "100x100>").processed.service_url),  rails_blob_path(file, disposition: "attachment"))%>
-                    <% elsif file.variable? %>
-                      <%= link_to(image_tag(file), rails_blob_path(file, disposition: "attachment"))%>
-                    <% else %>
-                      <% file_title = file.blob.filename %>
-                      <%= link_to "#{file_title}", rails_blob_path(file, disposition: "attachment") %>
-                    <% end %>
-                  </div>
-                  <% end %>
-              <% end %>
-            </div>
-          </div>
+        </div>
+        <% if @project.is_admin %>
+          <%= render :partial => 'topics/new', :object => @project.topics.build, as: 'topic' %>
+        <% end %>
+        <%= render :partial => 'topics/index', :object => @project %>
+        <%= render :partial => 'add_attachment', :object => @project %>
+        <%= render :partial => 'index_attachment', :object => @project %>
       </div>
     </div>
   </div>
