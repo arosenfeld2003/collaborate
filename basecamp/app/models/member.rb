@@ -11,6 +11,8 @@ class Member < ApplicationRecord
       elem.project.owner = elem.project.user.name
       elem.project.is_owner = false
       elem.project.is_admin = elem.is_admin
+      elem.project.num_members = elem.project.members.count
+      elem.project.num_topics = elem.project.topics.count
       elem.project
     end
     return projects

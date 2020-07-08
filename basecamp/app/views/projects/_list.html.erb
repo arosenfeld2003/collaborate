@@ -21,11 +21,15 @@
           </div>
         <div class="card-body overflow-auto">
           <p class="card-text"><%= project.description %></p>
-          <%= render :partial => 'members/index', :object => project.members, as: 'members' %>
         </div>
 
         <div class="card-footer border-light">
-          <div class="text-right">
+          <div class="row">
+            <div class="col-auto mr-auto">
+              <%= svg 'member' %><span class="badge badge-secondary"><%= project.num_members + 1 %></span>
+              <i class="ml-2 mr-1 fa fa-comments-o" aria-hidden="true"></i><span class="badge badge-secondary"><%= project.num_topics %></span>
+            </div>
+          <div class="col-auto">
             <% if !project.is_owner %>
               <%= link_to project_member_unsubscribe_path(project, project.member), :class => 'btn btn-danger  btn-sm',
                      method: :delete,
@@ -39,6 +43,7 @@
                     <%= svg 'delete' %>
                     <% end %>
             <% end %>
+            </div>
         </div>
     </div>
   </div>

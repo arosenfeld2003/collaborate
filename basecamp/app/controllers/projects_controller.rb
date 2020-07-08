@@ -21,6 +21,8 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
+    @project.member = Project.membership(current_user, @project)
+    @project.is_owner = Project.owner(current_user, @project)
   end
 
   # GET /projects/new

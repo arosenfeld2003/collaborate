@@ -1,4 +1,4 @@
-<main>
+<main class="overflow-auto project_main">
   <div class="container form">
     <div class="row h-100 justify-content-center">
       <div class="col-9 mt-4">
@@ -10,7 +10,6 @@
             <%= render :partial => 'topics/new', :object => @project.topics.build, as: 'topic' %>
           <% end %>
           <%= render :partial => 'topics/index', :object => @project %>
-          <% if @project.is_admin %>
           <div class="attach-form">
             <%= form_with(model: @project, local: true, class: "form-attach") do |form| %>
               <div class="attach-form">
@@ -47,18 +46,27 @@
               <% end %>
             </div>
           </div>
-            <div class="centered my-3 fixed-bottom">
-              <%= link_to edit_project_path(@project), class: "btn btn-info mx-3" do %>
-                <%= svg 'edit' %>
-                Edit Project
-              <% end %>
-              <%= link_to project_path(@project),data: { confirm: "Are you sure you want to delete this project?" }, method: :delete, class: "text-muted mx-3" do %>
-                <%= svg 'delete' %>
-                Delete Project
-              <% end %>
-            </div>
-          <% end %>
       </div>
     </div>
   </div>
 </main>
+<nav class="navbar  navbar-light px-4 fixed-bottom justify-content-center">
+  <ul class="nav align-items-center">
+    <% if @project.is_admin %>
+      <li class="nav-item">
+        <%= link_to edit_project_path(@project), class: "btn btn-info mx-3" do %>
+          <%= svg 'edit' %>
+          Edit Project
+        <% end %>
+      </li>
+    <% end %>
+    <% if !@project.is_owner %>
+      <li class="nav-item ml-3">
+        <%= link_to project_member_unsubscribe_path(@project, @project.member), :class => 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure you want to Unsubsciribe from this project?' } do %>
+          <%= svg 'log_out' %>
+          Leave Project
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</nav>
