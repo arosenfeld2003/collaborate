@@ -94,7 +94,7 @@ class ProjectsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def project_params
       # use fetch instead of require for empty attachment field
-      params.fetch(:document, {}).permit(
+      params.fetch(:project, {}).permit(
         :name,
         :description,
         :member_id,
