@@ -4,6 +4,7 @@
 // that code so it'll be compiled.
 
 require("custom/projectsFilter")
+require("custom/showAttachmentFilename")
 require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
