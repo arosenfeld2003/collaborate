@@ -5,6 +5,7 @@
 
 require("custom/projectsFilter")
 require("custom/showAttachmentFilename")
+require("custom/dropdownMenu")
 require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
