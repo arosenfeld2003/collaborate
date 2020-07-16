@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_05_231320) do
+ActiveRecord::Schema.define(version: 2020_07_15_165711) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -40,6 +40,10 @@ ActiveRecord::Schema.define(version: 2020_07_05_231320) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "project_id"
     t.boolean "is_admin", default: false
+    t.boolean "can_read"
+    t.boolean "can_update"
+    t.boolean "can_write"
+    t.boolean "can_delete"
   end
 
   create_table "messages", force: :cascade do |t|
