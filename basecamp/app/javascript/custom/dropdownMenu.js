@@ -1,8 +1,11 @@
 document.addEventListener('turbolinks:load', function() {
-  var dropdownBtn = document.querySelector(".dropdown-toggle");
-  var dropdownMenu = document.querySelector(".dropdown-menu");
+  let dropdownBtn = document.querySelectorAll(".dropdown-toggle");
 
-  dropdownBtn.addEventListener("click", (e) => {
-    dropdownMenu.classList.toggle("show");
-  });
+  for (let i = 0; i < dropdownBtn.length; i++) {
+    dropdownBtn[i].addEventListener("click", (e) => {
+      let dropdown = e.target.parentNode;
+      let dropdownContent = dropdown.querySelector(".dropdown-menu");
+      dropdownContent.classList.toggle("show");
+    });
+  }
 }, false);
