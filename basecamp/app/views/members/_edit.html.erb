@@ -10,7 +10,7 @@
         <% end %>
       </div>
       <div class="col-3 text-truncate"><small><%= member.email %></small></div>
-      <div class="col-4 text-right">
+      <div class="col-6 text-right">
         <% if member.is_admin == true %>
           <%= link_to 'Remove Admin Role', [member.project, member], :class => 'btn btn-outline-dark  btn-sm',
                 method: :put
@@ -20,6 +20,19 @@
                 method: :put
           %>
         <% end %>
+        <%= bootstrap_form_for(member, url: project_members_path(@project), class:"permission-form") do |f| %>
+        <div class="dropdown update_btn">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Change permission
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <%= f.check_box :can_read, label: "Can read tasks" %>
+            <%= f.check_box :can_write, label: "Can write tasks" %>
+            <%= f.check_box :can_update, label: "Can update tasks" %>
+            <%= f.check_box :can_delete, label: "Can delete tasks" %>
+          </div>
+        </div>
+      <% end %>
       <%= link_to [member.project, member], :class => 'btn btn-danger  btn-sm',
             method: :delete,
             data: { confirm: 'Are you sure you want to delete this member?' } do %>

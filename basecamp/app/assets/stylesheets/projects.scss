@@ -198,17 +198,18 @@
     text-align: inherit;
     white-space: nowrap;
     background-color: transparent;
+    margin-bottom: 3px;
 
     &:hover {
       color: #16181b;
       text-decoration: none;
       background-color: #f8f9fa;
     }
+  }
 
-    &:active {
-      color: #fff;
-      text-decoration: none;
-      background-color: #545b62;
-    }
+  input[type=checkbox]:checked + label {
+    color: #fff;
+    text-decoration: none;
+    background-color: #007bff;
   }
 }

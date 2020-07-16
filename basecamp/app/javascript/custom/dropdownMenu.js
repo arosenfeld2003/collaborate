@@ -5,12 +5,4 @@ document.addEventListener('turbolinks:load', function() {
   dropdownBtn.addEventListener("click", (e) => {
     dropdownMenu.classList.toggle("show");
   });
-
-  window.onclick = function(event) {
-  if (!event.target.matches('.dropdown-toggle')) {
-    if (dropdownMenu.classList.contains('show')) {
-      dropdownMenu.classList.remove('show');
-    }
-  }
-}
 }, false);
