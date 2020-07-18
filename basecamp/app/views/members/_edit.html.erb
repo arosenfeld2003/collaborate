@@ -12,43 +12,43 @@
       <div class="col-3 text-truncate"><small><%= member.email %></small></div>
       <div class="col-6 text-right">
         <% if member.is_admin == true %>
-          <%= link_to 'Remove Admin Role', [member.project, member], :class => 'btn btn-outline-dark  btn-sm',
+          <%= link_to 'Remove Admin Role', [member.project, member, :is_admin => true], :class => 'btn btn-outline-dark  btn-sm',
                 method: :put
           %>
         <% else %>
-          <%= link_to 'Add Admin Role', [member.project, member], :class => 'btn btn-outline-dark  btn-sm',
+          <%= link_to 'Add Admin Role', [member.project, member, :is_admin => true], :class => 'btn btn-outline-dark  btn-sm',
                 method: :put
           %>
         <% end %>
         <div class="permission-form">
           <div class="dropdown update_btn">
-            <button class="btn btn-outline-dark btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-outline-dark btn-sm dropdown-toggle"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Change permission
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <%= bootstrap_form_for(member, url: project_member_path(project)) do |f| %>
+              <%= bootstrap_form_for([member.project, member], url: project_member_path(member.project, member)) do |f| %>
                 <% if member.can_read == true %>
-                  <%= f.check_box :can_read, label: "Can read tasks" %>
+                  <%= f.check_box :can_read, label: "Can read tasks", checked: true, id: "id-#{rand()+member.id+1}" %>
                 <% else %>
-                  <%= f.check_box :can_read, label: "Can read tasks" %>
+                  <%= f.check_box :can_read, label: "Can read tasks", id: "id-#{rand()+member.id+1}" %>
                 <% end %>
                 <% if member.can_write == true %>
-                  <%= f.check_box :can_write, label: "Can write tasks", checked: true %>
+                  <%= f.check_box :can_write, label: "Can write tasks", checked: true, id: "id-#{rand()+member.id+2}" %>
                 <% else %>
-                  <%= f.check_box :can_write, label: "Can write tasks" %>
+                  <%= f.check_box :can_write, label: "Can write tasks", id: "id-#{rand()+member.id+2}" %>
                 <% end %>
                 <% if member.can_update == true %>
-                  <%= f.check_box :can_update, label: "Can update tasks", checked: true %>
+                  <%= f.check_box :can_update, label: "Can update tasks", checked: true, id:"id-#{rand()+member.id+3}" %>
                 <% else %>
-                  <%= f.check_box :can_update, label: "Can update tasks" %>
+                  <%= f.check_box :can_update, label: "Can update tasks", id:"id-#{rand()+member.id+3}" %>
                 <% end %>
                 <% if member.can_update == true %>
-                  <%= f.check_box :can_delete, label: "Can delete tasks", checked: true %>
+                  <%= f.check_box :can_delete, label: "Can delete tasks", checked: true, id: "id-#{rand()+member.id+4}" %>
                 <% else %>
-                  <%= f.check_box :can_delete, label: "Can delete tasks" %>
+                  <%= f.check_box :can_delete, label: "Can delete tasks", id: "id-#{rand()+member.id+4}" %>
                 <% end %>
 
-                <div class="update_btn"><%= f.primary "Update permission", render_as_button: true, class: 'btn btn-warning'%></div>
+                <div class="update_btn bottom"><%= f.primary "Update permission", render_as_button: true, class: 'btn btn-warning'%></div>
               <% end %>
             </div>
           </div>

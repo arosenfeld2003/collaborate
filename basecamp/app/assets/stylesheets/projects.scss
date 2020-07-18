@@ -221,8 +221,12 @@
     text-align: center;
   }
 
-  .update_btn {
+  .update_btn.bottom {
     margin-bottom: 0;
     margin-top: 10px;
   }
+}
+
+.dropdown-toggle.show + .dropdown-menu {
+  display: block;
 }
