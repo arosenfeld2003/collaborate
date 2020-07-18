@@ -213,3 +213,20 @@
     background-color: #007bff;
   }
 }
+
+.permission-form {
+  display: inline-block;
+
+  .edit_member {
+    text-align: center;
+  }
+
+  .update_btn.bottom {
+    margin-bottom: 0;
+    margin-top: 10px;
+  }
+}
+
+.dropdown-toggle.show + .dropdown-menu {
+  display: block;
+}
