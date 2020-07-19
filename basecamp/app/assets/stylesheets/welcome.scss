@@ -228,7 +228,7 @@
 }
 
 .topic {
-  max-height: 30vh;
+  max-height: 50vh;
 }
 
 .admin_edit_messages {
@@ -245,4 +245,12 @@
 
 .project_main, .topic_main {
   max-height: 85vh;
+}
+
+.messages_list {
+  scroll-snap-type: y mandatory;
+}
+
+.messages_list >  div:last-child {
+  scroll-snap-align: end;
 }

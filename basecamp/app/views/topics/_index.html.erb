@@ -1,8 +1,8 @@
-<% if @project.topics.length %>
-  <div class="row mt-4">
+<div class="row mt-4" id="topics">
+  <% if @project.topics.length %>
     <% @project.topics.each do |topic| %>
       <% if topic.id %>
-        <div class="col-6 mb-4">
+        <div class="col-12 mb-4">
           <div class="card border-info topic">
               <div class="card-header">
                 <div class="row">
@@ -14,14 +14,14 @@
                       <%= link_to edit_project_topic_path(@project, topic), class: "mr-1" do %>
                         <%= svg 'edit' %>
                       <% end %>
-                      <%= link_to project_topic_path(@project, topic), method: :delete do %>
+                      <%= link_to project_topic_path(@project, topic), method: :delete, data: { confirm: 'Do you really want to delete this topic?' }  do %>
                         <%= svg 'delete' %>
                       <% end %>
                     </div>
                   <% end %>
                 </div>
               </div>
-              <div class="card-body overflow-auto">
+              <div class="card-body overflow-auto messages_list">
                 <%= render :partial => 'messages/index', :locals => { :project => @project, :topic => topic, :messages => Message.list(topic, current_user.id) } %>
               </div>
               <div class="card-footer pb-0">
@@ -31,5 +31,5 @@
         </div>
       <% end %>
     <% end %>
-  </div>
-<% end %>
+  <% end %>
+</div>
