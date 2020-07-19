@@ -15,7 +15,7 @@
                 <div class="col-4 align-self-end update_btn "><%= form.submit "Update Description", class: "btn btn-secondary" %></div>
               </div>
           <% end %>
-          <%= render :partial => 'members/edit', :object => @project.members, as: 'members' %>
+          <%= render :partial => 'members/edit', :object => @project, as: 'project' %>
           <%= render :partial => 'members/new', :object => @project.members.build, as: 'member' %>
       </div>
       <div class="col">
