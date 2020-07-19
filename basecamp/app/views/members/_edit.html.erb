@@ -28,24 +28,24 @@
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <%= bootstrap_form_for([member.project, member], url: project_member_path(member.project, member)) do |f| %>
                 <% if member.can_read == true %>
-                  <%= f.check_box :can_read, label: "Can read tasks", checked: true, id: "id-#{rand()+member.id+1}" %>
+                  <%= f.check_box :can_read, label: "Can read tasks", checked: true, id: "id-#{rand(100)+member.id+1}" %>
                 <% else %>
-                  <%= f.check_box :can_read, label: "Can read tasks", id: "id-#{rand()+member.id+1}" %>
+                  <%= f.check_box :can_read, label: "Can read tasks", id: "id-#{rand(100)+member.id+1}" %>
                 <% end %>
                 <% if member.can_write == true %>
-                  <%= f.check_box :can_write, label: "Can write tasks", checked: true, id: "id-#{rand()+member.id+2}" %>
+                  <%= f.check_box :can_write, label: "Can write tasks", checked: true, id: "id-#{rand(100)+member.id+2}" %>
                 <% else %>
-                  <%= f.check_box :can_write, label: "Can write tasks", id: "id-#{rand()+member.id+2}" %>
+                  <%= f.check_box :can_write, label: "Can write tasks", id: "id-#{rand(100)+member.id+2}" %>
                 <% end %>
                 <% if member.can_update == true %>
-                  <%= f.check_box :can_update, label: "Can update tasks", checked: true, id:"id-#{rand()+member.id+3}" %>
+                  <%= f.check_box :can_update, label: "Can update tasks", checked: true, id:"id-#{rand(100)+member.id+3}" %>
                 <% else %>
-                  <%= f.check_box :can_update, label: "Can update tasks", id:"id-#{rand()+member.id+3}" %>
+                  <%= f.check_box :can_update, label: "Can update tasks", id:"id-#{rand(100)+member.id+3}" %>
                 <% end %>
-                <% if member.can_update == true %>
-                  <%= f.check_box :can_delete, label: "Can delete tasks", checked: true, id: "id-#{rand()+member.id+4}" %>
+                <% if member.can_delete == true %>
+                  <%= f.check_box :can_delete, label: "Can delete tasks", checked: true, id: "id-#{rand(100)+member.id+4}" %>
                 <% else %>
-                  <%= f.check_box :can_delete, label: "Can delete tasks", id: "id-#{rand()+member.id+4}" %>
+                  <%= f.check_box :can_delete, label: "Can delete tasks", id: "id-#{rand(100)+member.id+4}" %>
                 <% end %>
 
                 <div class="update_btn bottom"><%= f.primary "Update permission", render_as_button: true, class: 'btn btn-warning'%></div>
