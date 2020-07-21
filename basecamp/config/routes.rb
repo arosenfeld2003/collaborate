@@ -10,6 +10,9 @@ Rails.application.routes.draw do
     resources :topics do
       resources :messages
     end
+    resources :tasks do
+      resources :sub_tasks
+    end
   end
 
   devise_for :users

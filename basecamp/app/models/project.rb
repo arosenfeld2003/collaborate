@@ -6,6 +6,7 @@ class Project < ApplicationRecord
   belongs_to :user
   has_many :members, dependent: :destroy
   has_many :topics, dependent: :destroy
+  has_many :tasks, dependent: :destroy
   has_many_attached :attachments, dependent: :destroy
 
   def self.role(current_user, project)
