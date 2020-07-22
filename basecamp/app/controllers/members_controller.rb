@@ -30,6 +30,9 @@ class MembersController < ApplicationController
       if @member.email == current_user.email
         format.html { redirect_to edit_project_path(@project), alert: "You are already a member of this project"}
       elsif @member.save
+        if @member.is_admin == true
+          Member.change_permissions_to_true(@member.email)
+        end
         format.html { redirect_to edit_project_path(@project)}
       else
         format.html { redirect_to edit_project_path(@project), alert: @member.errors.full_messages[0]  }
@@ -43,6 +46,11 @@ class MembersController < ApplicationController
     respond_to do |format|
       if params[:is_admin]
         if @member.update(:is_admin => !@member.is_admin)
+          if @member.is_admin == true
+            Member.change_permissions_to_true(@member.email)
+          else
+            Member.change_permissions_to_false(@member.email)
+          end
           format.html { redirect_to edit_project_path(@project)}
           format.json { render :show, status: :ok, location: @member }
         else
