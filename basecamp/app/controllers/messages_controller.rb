@@ -61,7 +61,7 @@ class MessagesController < ApplicationController
 
     def get_project
       @project = Project.find(params[:project_id])
-      @project.is_admin = Project.role(current_user, @project)
+      @project.is_admin = Project.get_role(current_user, @project)
     end
 
     def get_topic

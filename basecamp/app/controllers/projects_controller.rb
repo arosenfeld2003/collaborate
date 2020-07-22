@@ -88,7 +88,8 @@ class ProjectsController < ApplicationController
     def set_project
       @project = Project.find(params[:id])
       @project.owner = @project.user.name
-      @project.is_admin = Project.role(current_user, @project)
+      @project.is_admin = Project.get_role(current_user, @project)
+      @project.permissions = Project.get_permissions(current_user, @project)
     end
 
     # Only allow a list of trusted parameters through.

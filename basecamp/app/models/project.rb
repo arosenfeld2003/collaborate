@@ -1,5 +1,5 @@
 class Project < ApplicationRecord
-  attr_accessor :member, :is_owner, :is_admin, :css_class, :owner, :num_members, :num_topics
+  attr_accessor :member, :is_owner, :is_admin, :css_class, :owner, :num_members, :num_topics, :permissions
   validates :name, presence: true
 
 
@@ -7,8 +7,9 @@ class Project < ApplicationRecord
   has_many :members, dependent: :destroy
   has_many :topics, dependent: :destroy
   has_many_attached :attachments, dependent: :destroy
+  has_many :tasks, dependent: :destroy
 
-  def self.role(current_user, project)
+  def self.get_role(current_user, project)
     if project.user == current_user
       return true
     end
@@ -37,5 +38,15 @@ class Project < ApplicationRecord
       end
     end
     return result
+  end
+
+  def self.get_permissions(current_user, project)
+    permissions = {:can_read => true, :can_update => true, :can_write => true, :can_delete => true}
+    if project.user == current_user
+      return permissions
+    end
+    member = Member.where(:email => current_user.email, :project => project)[0]
+    permissions.keys.each {|key| permissions[key] = member[key]}
+    return permissions
   end
 end

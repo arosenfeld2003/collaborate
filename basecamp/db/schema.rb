@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_15_165711) do
+ActiveRecord::Schema.define(version: 2020_07_20_002049) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -40,10 +40,10 @@ ActiveRecord::Schema.define(version: 2020_07_15_165711) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "project_id"
     t.boolean "is_admin", default: false
-    t.boolean "can_read"
-    t.boolean "can_update"
-    t.boolean "can_write"
-    t.boolean "can_delete"
+    t.boolean "can_read", default: false
+    t.boolean "can_update", default: false
+    t.boolean "can_write", default: false
+    t.boolean "can_delete", default: false
   end
 
   create_table "messages", force: :cascade do |t|
@@ -64,6 +64,15 @@ ActiveRecord::Schema.define(version: 2020_07_15_165711) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
     t.integer "member_id"
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.string "title"
+    t.boolean "completed"
+    t.integer "project_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_tasks_on_project_id"
   end
 
   create_table "topics", force: :cascade do |t|
@@ -100,5 +109,6 @@ ActiveRecord::Schema.define(version: 2020_07_15_165711) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "messages", "topics"
   add_foreign_key "messages", "users"
+  add_foreign_key "tasks", "projects"
   add_foreign_key "topics", "projects"
 end
