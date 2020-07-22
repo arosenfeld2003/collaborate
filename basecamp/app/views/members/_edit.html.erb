@@ -12,7 +12,7 @@
       <div class="col-3 text-truncate"><small><%= member.email %></small></div>
       <div class="col-6 text-right">
         <% if member.is_admin == true %>
-          <%= link_to 'Remove Admin Role', [member.project, member, :is_admin => true], :class => 'btn btn-outline-dark  btn-sm',
+          <%= link_to 'Remove Admin Role', [member.project, member, :is_admin => false], :class => 'btn btn-outline-dark  btn-sm',
                 method: :put
           %>
         <% else %>

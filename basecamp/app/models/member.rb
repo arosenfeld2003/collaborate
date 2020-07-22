@@ -18,4 +18,20 @@ class Member < ApplicationRecord
     return projects
   end
 
+  def self.change_permissions_to_true(email)
+    member = Member.where(:email => email)
+    member.update(:can_read => true)
+    member.update(:can_write => true)
+    member.update(:can_update => true)
+    member.update(:can_delete => true)
+  end
+
+  def self.change_permissions_to_false(email)
+    member = Member.where(:email => email)
+    member.update(:can_read => false)
+    member.update(:can_write => false)
+    member.update(:can_update => false)
+    member.update(:can_delete => false)
+  end
+
 end
