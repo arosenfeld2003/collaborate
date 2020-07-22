@@ -23,6 +23,7 @@ class ProjectsController < ApplicationController
   def show
     @project.member = Project.membership(current_user, @project)
     @project.is_owner = Project.owner(current_user, @project)
+    p @project.tasks
   end
 
   # GET /projects/new

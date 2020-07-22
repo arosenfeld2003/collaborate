@@ -14,6 +14,8 @@
           <%= render :partial => 'topics/new', :object => @project.topics.build, as: 'topic' %>
         <% end %>
         <%= render :partial => 'topics/index', :object => @project %>
+        <%= render :partial => 'tasks/new', :object => @project.tasks.build, as: 'task' %>
+        <%= render :partial => 'tasks/index', :object => @project %>
         <%= render :partial => 'add_attachment', :object => @project %>
         <%= render :partial => 'index_attachment', :object => @project %>
       </div>
@@ -37,6 +39,12 @@
             <%= link_to project_path(@project, anchor: "topics"), class: "btn btn-warning mb-3" do %>
               <%= svg 'chat' %>
               Topics
+            <% end %>
+          </div>
+          <div>
+            <%= link_to project_path(@project, anchor: "tasks"), class: "btn btn-warning mb-3" do %>
+              <%= svg 'tasks' %>
+              Tasks
             <% end %>
           </div>
           <div>

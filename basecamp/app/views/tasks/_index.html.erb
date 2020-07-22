@@ -1,0 +1,19 @@
+<ul class="list-group list-group-flush mb-3" id="tasks">
+  <% if @project.tasks.length %>
+    <% @project.tasks.each do |task| %>
+      <% if task.id && task.completed %>
+        <li class="list-group-item text-muted">
+          <%= link_to [@project, task, :completed => true], method: :put do %>
+            <del><%= task.title %></del>
+          <% end %>
+        </li>
+      <% elsif task.id %>
+        <li class="list-group-item">
+          <%= link_to [@project, task, :completed => false], method: :put do %>
+            <%= task.title %>
+          <% end %>
+        </li>
+      <% end %>
+    <% end %>
+  <% end %>
+</ul>

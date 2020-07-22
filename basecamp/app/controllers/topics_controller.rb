@@ -22,7 +22,7 @@ class TopicsController < ApplicationController
     @topic.author = current_user.name
     respond_to do |format|
       if @topic.save
-        format.html { redirect_to project_path(@project)}
+        format.html { redirect_to project_path(@project, :anchor =>"topics")}
       else
         format.html { redirect_to project_path(@project), alert: @topic.errors.full_messages[0]  }
       end
