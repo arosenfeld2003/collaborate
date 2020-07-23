@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_20_002049) do
+ActiveRecord::Schema.define(version: 2020_07_23_020916) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -66,12 +66,22 @@ ActiveRecord::Schema.define(version: 2020_07_20_002049) do
     t.integer "member_id"
   end
 
+  create_table "subtasks", force: :cascade do |t|
+    t.string "title"
+    t.boolean "completed", default: false
+    t.integer "task_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["task_id"], name: "index_subtasks_on_task_id"
+  end
+
   create_table "tasks", force: :cascade do |t|
     t.string "title"
     t.boolean "completed"
     t.integer "project_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "last_edit"
     t.index ["project_id"], name: "index_tasks_on_project_id"
   end
 
@@ -109,6 +119,7 @@ ActiveRecord::Schema.define(version: 2020_07_20_002049) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "messages", "topics"
   add_foreign_key "messages", "users"
+  add_foreign_key "subtasks", "tasks"
   add_foreign_key "tasks", "projects"
   add_foreign_key "topics", "projects"
 end

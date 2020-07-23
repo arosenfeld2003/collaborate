@@ -2,7 +2,7 @@
   <% if @project.topics.length %>
     <% @project.topics.each do |topic| %>
       <% if topic.id %>
-        <div class="col-12 mb-4">
+        <div class="col-12 mb-4" id="topic-<%= topic.id %>">
           <div class="card border-info topic">
               <div class="card-header">
                 <div class="row">

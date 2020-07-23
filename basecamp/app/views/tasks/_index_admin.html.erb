@@ -1,0 +1,24 @@
+<% if @project.tasks.length %>
+  <p class="text-muted" id="tasks"> Tasks:</p>
+  <ul class="list-group list-group-flush mb-3">
+    <% @project.tasks.each do |task| %>
+      <% if task.id && task.completed %>
+        <li class="list-group-item text-muted">
+            <div class="row">
+              <div class="col-1"><%= link_to [@project, task, :completed => true], method: :put do %><%= svg 'checked' %><% end %></div>
+              <div class="col"><%= link_to [@project, task, :completed => true], method: :put do %><del><%= task.title %></del><% end %></div>
+              <div class="col-auto"></div>
+            </div>
+        </li>
+      <% elsif task.id %>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-1"><%= link_to [@project, task, :completed => true], method: :put do %><%= svg 'unchecked' %><% end %></div>
+            <div class="col"><%= link_to [@project, task, :completed => true], method: :put do %><%= task.title %><% end %></div>
+            <div class="col-auto"></div>
+          </div>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+<% end %>

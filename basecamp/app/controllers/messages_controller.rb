@@ -22,9 +22,10 @@ class MessagesController < ApplicationController
     @message = @topic.messages.build(message_params)
     @message.author = current_user.name
     @message.user_id = current_user.id
+    topic_id = "topic-" + @topic.id.to_s
     respond_to do |format|
       if @message.save
-        format.html { redirect_to project_path(@project)}
+        format.html { redirect_to project_path(@project, :anchor => topic_id)}
       else
         format.html { redirect_to project_path(@project), alert: @message.errors.full_messages[0]  }
       end
