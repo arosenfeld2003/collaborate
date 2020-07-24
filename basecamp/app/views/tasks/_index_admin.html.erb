@@ -3,7 +3,14 @@
   <ul class="list-group list-group-flush mb-3">
     <% @project.tasks.each do |task| %>
       <% if task.id %>
-        <%= render :partial => 'subtasks/new', :locals => { :project => @project, :task => task, :subtask => task.subtasks.build } %>
+      <div class="dropdown">
+        <button class="btn btn-warning dropdown-toggle"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Add subtask
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <%= render :partial => 'subtasks/new', :locals => { :project => @project, :task => task, :subtask => task.subtasks.build } %>
+        </div>
+      </div>
       <% end %>
       <% if task.id && task.completed %>
         <li class="list-group-item text-muted">
@@ -12,6 +19,7 @@
               <div class="col"><%= link_to [@project, task, :completed => true], method: :put do %><del><%= task.title %></del><% end %></div>
               <div class="col-auto"></div>
             </div>
+            <%= render :partial => 'subtasks/index', :locals => { :project => @project, :task => task, :subtask => task.subtasks.build } %>
         </li>
       <% elsif task.id %>
         <li class="list-group-item">
@@ -20,6 +28,7 @@
             <div class="col"><%= link_to [@project, task, :completed => true], method: :put do %><%= task.title %><% end %></div>
             <div class="col-auto"></div>
           </div>
+          <%= render :partial => 'subtasks/index', :locals => { :project => @project, :task => task, :subtask => task.subtasks.build } %>
         </li>
       <% end %>
     <% end %>

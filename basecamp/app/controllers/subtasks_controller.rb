@@ -24,12 +24,21 @@ class SubtasksController < ApplicationController
   end
 
   def update
+    p @subtask
     respond_to do |format|
-      if @subtask.update(subtask_params)
-        format.html { redirect_to project_path(@project)}
+      if params[:completed]
+        if @subtask.update(:completed => !@subtask.completed)
+          format.html { redirect_to project_path(@project, :anchor =>"subtasks")}
+          format.json { render :show, status: :ok, location: @subtask }
+        else
+          format.html { render :edit }
+          format.json { render json: @subtask.errors, status: :unprocessable_entity }
+        end
       else
-        format.html { render :edit }
-        format.json { render json: @subtask.errors, status: :unprocessable_entity }
+        if @subtask.update(:title => params[:title])
+          format.html { redirect_to project_path(@project, :anchor =>"subtasks")}
+          format.json { render :show, status: :ok, location: @subtask }
+        end
       end
     end
   end
