@@ -1,6 +1,7 @@
 <% if @project.tasks.length %>
   <p class="text-muted"> Tasks:</p>
   <ul class="list-group list-group-flush mb-3" id="tasks">
+
     <% @project.tasks.each do |task| %>
       <% if task.id && task.completed %>
         <li class="list-group-item text-muted">

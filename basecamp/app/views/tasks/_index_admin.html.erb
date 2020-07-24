@@ -2,6 +2,9 @@
   <p class="text-muted" id="tasks"> Tasks:</p>
   <ul class="list-group list-group-flush mb-3">
     <% @project.tasks.each do |task| %>
+      <% if task.id %>
+        <%= render :partial => 'subtasks/new', :locals => { :project => @project, :task => task, :subtask => task.subtasks.build } %>
+      <% end %>
       <% if task.id && task.completed %>
         <li class="list-group-item text-muted">
             <div class="row">
