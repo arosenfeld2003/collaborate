@@ -11,7 +11,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = @project.tasks.build(topic_params)
+    @task = @project.tasks.build(task_params)
     @task.completed = false
     respond_to do |format|
       if @task.save
@@ -63,7 +63,7 @@ class TasksController < ApplicationController
 
     def set_task
       @task = @project.tasks.find(params[:id])
-      user = User.find(@task.last_edit)
+      user = User.find(current_user.id)
       @task.last_edit_name = user.name
       @task.last_edit_email = user.email
     end
