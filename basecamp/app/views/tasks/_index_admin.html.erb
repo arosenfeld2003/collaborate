@@ -7,9 +7,7 @@
             <div class="row">
               <div class="col-1"><%= link_to [@project, task, :completed => true], method: :put do %><%= svg 'checked' %><% end %></div>
               <div class="col"><%= link_to [@project, task, :completed => true], method: :put do %><del><%= task.title %></del><% end %></div>
-<<<<<<< HEAD
               <div class="col-3"></div>
-=======
               <div class="col-auto">
                 <%= link_to edit_project_task_path(@project, task) do %>
                   <%= svg 'edit' %>
@@ -18,12 +16,11 @@
                   <%= svg 'delete' %>
                 <% end %>
               </div>
->>>>>>> 123f3039e91e60f6a310ccf6377399b560144940
             </div>
             <div class="row">
               <div class="col">
                 <div class="content-toogle">
-                  <button class="btn btn-warning content-toggle-btn"  type="button">
+                  <button class="btn btn-warning btn-sm content-toggle-btn"  type="button">
                     Add subtask
                   </button>
                   <div class="content-toggle-item">
@@ -40,17 +37,6 @@
             <div class="col-1"><%= link_to [@project, task, :completed => true], method: :put do %><%= svg 'unchecked' %><% end %></div>
             <div class="col"><%= link_to [@project, task, :completed => true], method: :put do %><%= task.title %><% end %></div>
             <div class="col-3"></div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <div class="content-toogle">
-                <button class="btn btn-warning content-toggle-btn"  type="button">
-                  Add subtask
-                </button>
-                <div class="content-toggle-item">
-                  <%= render :partial => 'subtasks/new', :locals => { :project => @project, :task => task, :subtask => task.subtasks.build } %>
-                </div>
-              </div>
             <div class="col-auto">
               <%= link_to edit_project_task_path(@project, task) do %>
                 <%= svg 'edit' %>
@@ -58,6 +44,18 @@
               <%= link_to project_task_path(@project, task), method: :delete, data: { confirm: 'Do you really want to delete this task?' }  do %>
                 <%= svg 'delete' %>
               <% end %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="content-toogle">
+                <button class="btn btn-warning btn-sm content-toggle-btn"  type="button">
+                  Add subtask
+                </button>
+                <div class="content-toggle-item">
+                  <%= render :partial => 'subtasks/new', :locals => { :project => @project, :task => task, :subtask => task.subtasks.build } %>
+                </div>
+              </div>
             </div>
           </div>
           <%= render :partial => 'subtasks/index', :locals => { :project => @project, :task => task, :subtask => task.subtasks.build } %>

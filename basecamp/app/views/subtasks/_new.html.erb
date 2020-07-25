@@ -4,7 +4,7 @@
       <p>Add new subtask</p>
       <%= f.text_field :title, require: true, hide_label: true %>
   </div>
-    <div class="col-3 align-self-end update_btn"><%= f.primary "Add".html_safe, render_as_button: true, class:  'btn btn-warning'%></div>
+    <div class="col-3 align-self-end update_btn"><%= f.primary "Add".html_safe, render_as_button: true, class:  'btn btn-warning btn-sm'%></div>
   </div>
   <% flash.each do |type, msg| %>
     <% if type == 'alert' %>
