@@ -227,6 +227,35 @@
   }
 }
 
-.dropdown-toggle.show + .dropdown-menu {
+.content-toggle-item {
+  display: none;
+}
+
+.dropdown-toggle.show + .dropdown-menu,
+.content-toggle-btn.show + .content-toggle-item {
   display: block;
+}
+
+.list-group-item {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.content-toogle {
+  margin-bottom: 10px;
+}
+
+.content-toggle-item {
+  margin-top: 30px;
+}
+
+.content-toggle-btn {
+  position: absolute;
+  right: 0;
+  top: -20px;
+}
+
+.subtasks-list {
+  margin-top: 10px;
+  margin-left: 20px;
 }
