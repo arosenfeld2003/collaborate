@@ -23,20 +23,23 @@ class SubtasksController < ApplicationController
     end
   end
 
+  def edit
+    redirect_to @project unless @project.permissions[:can_write] || @project.permissions[:can_update]
+  end
+
   def update
-    p @subtask
     respond_to do |format|
       if params[:completed]
         if @subtask.update(:completed => !@subtask.completed)
-          format.html { redirect_to project_path(@project, :anchor =>"subtasks")}
+          format.html { redirect_to project_path(@project, :anchor =>"tasks")}
           format.json { render :show, status: :ok, location: @subtask }
         else
           format.html { render :edit }
           format.json { render json: @subtask.errors, status: :unprocessable_entity }
         end
       else
-        if @subtask.update(:title => params[:title])
-          format.html { redirect_to project_path(@project, :anchor =>"subtasks")}
+        if @subtask.update(:title => params[:subtask][:title])
+          format.html { redirect_to project_path(@project, :anchor =>"tasks")}
           format.json { render :show, status: :ok, location: @subtask }
         end
       end
@@ -46,11 +49,7 @@ class SubtasksController < ApplicationController
   def destroy
     @subtask.destroy
     respond_to do |format|
-      if params[:path] == 'edit_subtask'
-        format.html { redirect_to project_path(@project) }
-      else
-        format.html { redirect_to edit_task_subtask_path(@project, @task) }
-      end
+        format.html { redirect_to project_path(@project, :anchor =>"tasks") }
     end
   end
 
@@ -63,6 +62,7 @@ class SubtasksController < ApplicationController
 
     def get_project
       @project = Project.find(params[:project_id])
+      @project.permissions = Project.get_permissions(current_user, @project)
     end
 
     def get_task

@@ -227,31 +227,25 @@
   }
 }
 
-.content-toggle-item {
+.content-toggle-wrap {
   display: none;
+
+  .list-group-item {
+    padding-left: 0;
+  }
 }
 
-.dropdown-toggle.show + .dropdown-menu,
-.content-toggle-btn.show + .content-toggle-item {
+.content-toggle {
+  padding-left: 30px;
+  padding-top: 10px;
+}
+
+.content-toggle.show {
+  .content-toggle-wrap {
+    display: block;
+  }
+}
+
+.dropdown-toggle.show + .dropdown-menu {
   display: block;
-}
-
-.list-group-item {
-  position: relative;
-  margin-bottom: 10px;
-}
-
-.content-toggle-item {
-  margin-top: 30px;
-}
-
-.content-toggle-btn {
-  position: absolute;
-  right: 0;
-  top: 3px;
-}
-
-.subtasks-list {
-  margin-top: 40px;
-  margin-left: 20px;
 }
