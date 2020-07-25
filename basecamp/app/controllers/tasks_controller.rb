@@ -22,9 +22,13 @@ class TasksController < ApplicationController
     end
   end
 
+  def edit
+    redirect_to @project unless @project.permissions[:can_write] || @project.permissions[:can_update]
+  end
+
   def update
-    p @task
     respond_to do |format|
+      p format
       if params[:completed]
         if @task.update(:completed => !@task.completed)
           format.html { redirect_to project_path(@project, :anchor => "tasks")}
@@ -34,7 +38,7 @@ class TasksController < ApplicationController
           format.json { render json: @task.errors, status: :unprocessable_entity }
         end
       else
-        if @task.update(:title => params[:title])
+        if @task.update(:title => params[:task][:title], :last_edit => current_user.id)
           format.html { redirect_to project_path(@project, :anchor => "tasks")}
           format.json { render :show, status: :ok, location: @task }
         end
@@ -42,6 +46,13 @@ class TasksController < ApplicationController
     end
   end
 
+  def destroy
+    @task.destroy
+    respond_to do |format|
+      format.html { redirect_to project_path(@project, :anchor => "tasks") }
+      format.json { head :no_content }
+    end
+  end
 
   private
     def get_project
@@ -52,9 +63,12 @@ class TasksController < ApplicationController
 
     def set_task
       @task = @project.tasks.find(params[:id])
+      user = User.find(@task.last_edit)
+      @task.last_edit_name = user.name
+      @task.last_edit_email = user.email
     end
 
-    def topic_params
+    def task_params
       params.require(:task).permit(:title, :completed)
     end
 end

@@ -7,7 +7,14 @@
             <div class="row">
               <div class="col-1"><%= link_to [@project, task, :completed => true], method: :put do %><%= svg 'checked' %><% end %></div>
               <div class="col"><%= link_to [@project, task, :completed => true], method: :put do %><del><%= task.title %></del><% end %></div>
-              <div class="col-auto"></div>
+              <div class="col-auto">
+                <%= link_to edit_project_task_path(@project, task) do %>
+                  <%= svg 'edit' %>
+                <% end %>
+                <%= link_to project_task_path(@project, task), method: :delete, data: { confirm: 'Do you really want to delete this task?' }  do %>
+                  <%= svg 'delete' %>
+                <% end %>
+              </div>
             </div>
         </li>
       <% elsif task.id %>
@@ -15,7 +22,14 @@
           <div class="row">
             <div class="col-1"><%= link_to [@project, task, :completed => true], method: :put do %><%= svg 'unchecked' %><% end %></div>
             <div class="col"><%= link_to [@project, task, :completed => true], method: :put do %><%= task.title %><% end %></div>
-            <div class="col-auto"></div>
+            <div class="col-auto">
+              <%= link_to edit_project_task_path(@project, task) do %>
+                <%= svg 'edit' %>
+              <% end %>
+              <%= link_to project_task_path(@project, task), method: :delete, data: { confirm: 'Do you really want to delete this task?' }  do %>
+                <%= svg 'delete' %>
+              <% end %>
+            </div>
           </div>
         </li>
       <% end %>
