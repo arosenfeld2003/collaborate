@@ -1,0 +1,23 @@
+<% if task.subtasks.length %>
+  <ul class="list-group list-group-flush subtasks-list mb-3">
+    <% task.subtasks.each do |subtask| %>
+      <% if subtask.id && subtask.completed %>
+        <li class="list-group-item text-muted">
+            <div class="row">
+              <div class="col-1"><%= link_to [@project, task, subtask, :completed => true], method: :put do %><%= svg 'checked' %><% end %></div>
+              <div class="col"><%= link_to [@project, task, subtask, :completed => true], method: :put do %><del><%= subtask.title %></del><% end %></div>
+              <div class="col-auto"></div>
+            </div>
+        </li>
+      <% elsif subtask.id %>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-1"><%= link_to [@project, task, subtask, :completed => true], method: :put do %><%= svg 'unchecked' %><% end %></div>
+            <div class="col"><%= link_to [@project, task, subtask, :completed => true], method: :put do %><%= subtask.title %><% end %></div>
+            <div class="col-auto"></div>
+          </div>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+<% end %>

@@ -7,6 +7,7 @@
             <div class="row">
               <div class="col-1"><%= link_to [@project, task, :completed => true], method: :put do %><%= svg 'checked' %><% end %></div>
               <div class="col"><%= link_to [@project, task, :completed => true], method: :put do %><del><%= task.title %></del><% end %></div>
+              <div class="col-3"></div>
               <div class="col-auto">
                 <%= link_to edit_project_task_path(@project, task) do %>
                   <%= svg 'edit' %>
@@ -16,12 +17,26 @@
                 <% end %>
               </div>
             </div>
+            <div class="row">
+              <div class="col">
+                <div class="content-toogle">
+                  <button class="btn btn-warning btn-sm content-toggle-btn"  type="button">
+                    Add subtask
+                  </button>
+                  <div class="content-toggle-item">
+                    <%= render :partial => 'subtasks/new', :locals => { :project => @project, :task => task, :subtask => task.subtasks.build } %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <%= render :partial => 'subtasks/index', :locals => { :project => @project, :task => task, :subtask => task.subtasks.build } %>
         </li>
       <% elsif task.id %>
         <li class="list-group-item">
           <div class="row">
             <div class="col-1"><%= link_to [@project, task, :completed => true], method: :put do %><%= svg 'unchecked' %><% end %></div>
             <div class="col"><%= link_to [@project, task, :completed => true], method: :put do %><%= task.title %><% end %></div>
+            <div class="col-3"></div>
             <div class="col-auto">
               <%= link_to edit_project_task_path(@project, task) do %>
                 <%= svg 'edit' %>
@@ -31,6 +46,19 @@
               <% end %>
             </div>
           </div>
+          <div class="row">
+            <div class="col">
+              <div class="content-toogle">
+                <button class="btn btn-warning btn-sm content-toggle-btn"  type="button">
+                  Add subtask
+                </button>
+                <div class="content-toggle-item">
+                  <%= render :partial => 'subtasks/new', :locals => { :project => @project, :task => task, :subtask => task.subtasks.build } %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <%= render :partial => 'subtasks/index', :locals => { :project => @project, :task => task, :subtask => task.subtasks.build } %>
         </li>
       <% end %>
     <% end %>
