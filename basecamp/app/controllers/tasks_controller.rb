@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
   before_action :get_project
-  before_action :set_task, only: [:edit, :update, :destroy]
+  before_action :set_task, only: [:edit, :update, :destroy, :create_subtask]
+  before_action :get_subtasks, only: [:destroy, :update]
 
   def new
     @task = @project.tasks.build
@@ -11,7 +12,6 @@ class TasksController < ApplicationController
   end
 
   def create
-    byebug
     @task = @project.tasks.build(task_params)
     @task.completed = false
     if params[:parent_id]
@@ -28,8 +28,10 @@ class TasksController < ApplicationController
   end
 
   def create_subtask
+    @task.is_parent = true
+    @task.save
     @title = params[:task][:title]
-    @parent_id = params[:id]
+    @parent_id = @task.id
     @subtask = @project.tasks.build({:title => @title, :is_subtask => true, :parent_id => @parent_id})
     respond_to do |format|
       if @subtask.save
@@ -47,6 +49,10 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if params[:completed]
+        # mark all subtasks as completed
+        @subtasks.each do |subtask|
+          subtask.update(:completed => !@task.completed)
+        end
         if @task.update(:completed => !@task.completed)
           format.html { redirect_to project_path(@project, :anchor => "tasks")}
           format.json { render :show, status: :ok, location: @task }
@@ -64,6 +70,10 @@ class TasksController < ApplicationController
   end
 
   def destroy
+    # delete all subtasks of the task to be destroyed
+    @subtasks.each do |subtask|
+      subtask.destroy
+    end
     @task.destroy
     respond_to do |format|
       format.html { redirect_to project_path(@project, :anchor => "tasks") }
@@ -83,6 +93,10 @@ class TasksController < ApplicationController
       user = User.find(current_user.id)
       @task.last_edit_name = user.name
       @task.last_edit_email = user.email
+    end
+
+    def get_subtasks
+      @subtasks = Task.where(parent_id: params[:id])
     end
 
     def task_params

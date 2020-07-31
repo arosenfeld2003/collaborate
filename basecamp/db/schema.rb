@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_28_162938) do
+ActiveRecord::Schema.define(version: 2020_07_31_154924) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 2020_07_28_162938) do
     t.integer "last_edit"
     t.integer "parent_id"
     t.boolean "is_subtask", default: false
+    t.boolean "is_parent", default: false
     t.index ["parent_id"], name: "index_tasks_on_parent_id"
     t.index ["project_id"], name: "index_tasks_on_project_id"
   end
