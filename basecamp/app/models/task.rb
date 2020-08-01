@@ -3,5 +3,7 @@ class Task < ApplicationRecord
   belongs_to :project
 
   validates :title, presence: true
-  has_many :subtasks, dependent: :destroy
+  has_many :subtasks, class_name: "Task",
+                      foreign_key: "parent_id"
+  belongs_to :parent, class_name: "Task", optional: true
 end

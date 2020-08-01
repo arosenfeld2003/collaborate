@@ -2,11 +2,27 @@
   <p class="text-muted" id="tasks"> Tasks:</p>
   <ul class="list-group list-group-flush mb-3">
     <% @project.tasks.each do |task| %>
-      <% if task.id && task.completed %>
-        <li class="list-group-item text-muted">
+      <% if task.id != nil %>
+        <% subtasks = Task.where(parent_id: task[:id]) %>
+        <% if task.is_parent == false && task.is_subtask == false %>
+          <% # render "tasks/task_list_item", task: task %>
+          <li class="list-group-item <%= 'text-muted' if task.completed %>">
             <div class="row">
-              <div class="col-1"><%= link_to [@project, task, :completed => true], method: :put do %><%= svg 'checked' %><% end %></div>
-              <div class="col"><%= link_to [@project, task, :completed => true], method: :put do %><del><%= task.title %></del><% end %></div>
+              <div class="col-1"><%= link_to [@project, task, :completed => true], method: :put do %>
+                <% if task.completed %>
+                  <%= svg 'checked' %>
+                <% else %>
+                  <%= svg 'unchecked'%>
+                <% end %>
+                <% end %>
+              </div>
+              <div class="col">
+                <%= link_to [@project, task, :completed => true], method: :put do %>
+                  <% if task.completed %><del><% end %>
+                    <%= task.title %>
+                  <% if task.completed %></del><% end %>
+                <% end %>
+              </div>
               <div class="col-3"></div>
               <div class="col-auto">
                 <span class="badge badge-secondary"><%= task.subtasks.length %></span><%= link_to "", class: "content-toggle-btn" do %>
@@ -20,28 +36,113 @@
                 <% end %>
               </div>
             </div>
-            <%= render :partial => 'subtasks/index', :locals => { :project => @project, :task => task, :subtask => task.subtasks.build } %>
-        </li>
-      <% elsif task.id %>
-        <li class="list-group-item">
-          <div class="row">
-            <div class="col-1"><%= link_to [@project, task, :completed => true], method: :put do %><%= svg 'unchecked' %><% end %></div>
-            <div class="col"><%= link_to [@project, task, :completed => true], method: :put do %><%= task.title %><% end %></div>
-            <div class="col-3"></div>
-            <div class="col-auto">
-              <span class="badge badge-secondary"><%= task.subtasks.length %></span><%= link_to "#0", class: "content-toggle-btn" do %>
-                <%= svg 'list_tasks' %>
-              <% end %>
-              <%= link_to edit_project_task_path(@project, task) do %>
-                <%= svg 'edit' %>
-              <% end %>
-              <%= link_to project_task_path(@project, task), method: :delete, data: { confirm: 'Do you really want to delete this task?' }  do %>
-                <%= svg 'delete' %>
-              <% end %>
+            <div class="content-toggle">
+              <div class="content-toggle-wrap">
+                <% subtasks.each do |subtask| %>
+                  <li class="<%= 'text-muted' if subtask.completed %>">
+                    <div class="list-group-item">
+                      <% # render "tasks/subtasks", task: task %>
+                      <div class="row">
+                        <div class="col-2">
+                          <% # render "tasks/task_list_item", task: subtask %>
+                          <%= link_to [@project, subtask, :completed => true], method: :put do %>
+                            <% if subtask.completed %>
+                              <%= svg 'checked' %>
+                            <% else %>
+                              <%= svg 'unchecked'%>
+                            <% end %>
+                          <% end %>
+                          <%= link_to [@project, subtask], method: :put do %>
+                            <% if subtask.completed %><del><% end %>
+                              <%= subtask.title %>
+                            <% if subtask.completed %></del><% end %>
+                          <% end %>
+                          <%= link_to project_task_path(@project, subtask), method: :delete, data: { confirm: 'Do you really want to delete this task?' }  do %>
+                            <%= svg 'delete' %>
+                          <% end %>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                <% end %>
             </div>
           </div>
-          <%= render :partial => 'subtasks/index', :locals => { :project => @project, :task => task, :subtask => task.subtasks.build } %>
         </li>
+        <% elsif task.is_parent %>
+          <% # render "tasks/task_list_item", task: task %>
+          <li class="list-group-item <%= 'text-muted' if task.completed %>">
+            <div class="row">
+              <div class="col-1">
+                <%= link_to [@project, task, :completed => true], method: :put do %>
+                  <% if task.completed %>
+                    <%= svg 'checked' %>
+                  <% else %>
+                    <%= svg 'unchecked'%>
+                  <% end %>
+                </div>
+              <div class="col">
+                <%= link_to [@project, @task, :completed => true], method: :put do %>
+                  <% if task.completed %><del><% end %>
+                    <%= task.title %>
+                  <% if task.completed %></del> <% end %>
+                <% end %>
+              </div>
+              <div class="col-3"></div>
+              <div class="col-auto">
+                <span class="badge badge-secondary">
+                  <%= task.subtasks.length %>
+                </span>
+                <%= link_to "", class: "content-toggle-btn" do %>
+                  <%= svg 'list_tasks' %>
+                <% end %>
+                <%= link_to edit_project_task_path(@project, task) do %>
+                  <%= svg 'edit' %>
+                <% end %>
+                <%= link_to project_task_path(@project, task), method: :delete, data: { confirm: 'Do you really want to delete this task?' }  do %>
+                  <%= svg 'delete' %>
+                <% end %>
+              </div>
+            </div>
+            <div class="content-toggle">
+              <div class="content-toggle-wrap">
+                <ul class="list-group list-group-flush subtasks-list mb-3">
+                  <% if subtasks.length == 0 %>
+                    <p>No subtasks yet.</p>
+                  <% else %>
+                    <% subtasks.each do |subtask| %>
+                      <li class="list-group-item <%= 'text-muted' if subtask.completed %>">
+                          <% # render "tasks/subtasks", task: task %>
+                          <div class="row">
+                            <div class="col">
+                              <% # render "tasks/task_list_item", task: subtask %>
+                              <%= link_to [@project, subtask, :completed => true], method: :put do %>
+                                <% if subtask.completed %>
+                                  <%= svg 'checked' %>
+                                <% else %>
+                                  <%= svg 'unchecked'%>
+                                <% end %>
+                              <% end %>
+                              <%= link_to [@project, subtask], method: :put do %>
+                                <% if subtask.completed %><del><% end %>
+                                  <%= subtask.title %>
+                                <% if subtask.completed %></del><% end %>
+                              <% end %>
+                            </div>
+                            <div class="col-1">
+                              <%= link_to project_task_path(@project, subtask), method: :delete, data: { confirm: 'Do you really want to delete this task?' }  do %>
+                                <%= svg 'delete' %>
+                              <% end %>
+                            </div>
+                          </div>
+                      </li>
+                    <% end %>
+                  <% end %>
+                  </ul>
+                </div>
+              </div>
+            </li>
+          <% end %>
+        <% end %>
       <% end %>
     <% end %>
   </ul>
