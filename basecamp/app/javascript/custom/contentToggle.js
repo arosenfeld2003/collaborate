@@ -1,10 +1,10 @@
 document.addEventListener('turbolinks:load', function() {
-  let contentToogleBtn = document.querySelectorAll(".content-toggle-btn");
+  let contentToggleBtn = document.querySelectorAll(".content-toggle-btn");
 
-  for (let i = 0; i < contentToogleBtn.length; i++) {
-    contentToogleBtn[i].addEventListener("click", (e) => {
+  for (let i = 0; i < contentToggleBtn.length; i++) {
+    contentToggleBtn[i].addEventListener("click", (e) => {
       e.preventDefault();
-      let parent = contentToogleBtn[i].closest(".list-group-item");
+      let parent = contentToggleBtn[i].closest(".list-group-item");
       let content = parent.querySelector(".content-toggle");
 
       content.classList.toggle("show");

@@ -49,7 +49,7 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if params[:completed]
-        # mark all subtasks as completed
+        # mark all subtasks as completed if parent is completed
         @subtasks.each do |subtask|
           subtask.update(:completed => !@task.completed)
         end

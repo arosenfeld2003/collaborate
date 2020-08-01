@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     resources :tasks do
       member do
         post :create_subtask
+        post :task_list_item
+        post :sub_task
       end
     end
   end

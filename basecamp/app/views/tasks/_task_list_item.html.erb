@@ -1,0 +1,31 @@
+<li class="list-group-item <%= 'text-muted' if task.completed %>">
+  <div class="row">
+    <div class="col-1"><%= link_to [@project, task, :completed => true], method: :put do %>
+      <% if task.completed %>
+        <%= svg 'checked' %>
+      <% else %>
+        <%= svg 'unchecked'%>
+      <% end %>
+    <% end %>
+    </div>
+    <div class="col">
+      <%= link_to [@project, @task, :completed => true], method: :put do %>
+        <% if task.completed %><del><% end %>
+          <%= task.title %>
+        <% if task.completed %></del> <% end %>
+      <% end %>
+    </div>
+    <div class="col-3"></div>
+  </div>
+  <div class="col-auto">
+    <span class="badge badge-secondary"><%= task.subtasks.length %></span><%= link_to "", class: "content-toggle-btn" do %>
+      <%= svg 'list_tasks' %>
+    <% end %>
+    <%= link_to edit_project_task_path(@project, task) do %>
+      <%= svg 'edit' %>
+    <% end %>
+    <%= link_to project_task_path(@project, task), method: :delete, data: { confirm: 'Do you really want to delete this task?' }  do %>
+      <%= svg 'delete' %>
+    <% end %>
+  </div>
+</li>
