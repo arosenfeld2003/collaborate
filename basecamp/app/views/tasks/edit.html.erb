@@ -1,32 +1,37 @@
 <main>
   <div class="container form">
     <div class="row h-100 justify-content-center">
-      <div class="col-9 mt-5">
-        <h2 class="centered">Edit Task</h2>
-        <p class="centered text-muted">Last edited by: <%= @task.last_edit_name %></p>
-        <%= bootstrap_form_with(model: [@project, @task], local: true) do |form| %>
-            <div class="row">
-              <div class="col-8"><%= form.text_field :title, label_class: "text-muted" %></div>
-              <div class="col-4 align-self-end update_btn"><%= form.submit "Update Title", class: "btn btn-secondary" %></div>
-            </div>
-        <% end %>
+      <div class="col">
+        <div class="row justify-content-center">
+          <div class="col-9 mt-5">
+            <h2 class="centered">Edit Task</h2>
+            <p class="centered text-muted">Last edited by: <%= @task.last_edit_name %></p>
+            <%= bootstrap_form_with(model: [@project, @task], local: true) do |form| %>
+                <div class="row">
+                  <div class="col-8"><%= form.text_field :title, label_class: "text-muted" %></div>
+                  <div class="col-4 align-self-end update_btn"><%= form.submit "Update Title", class: "btn btn-secondary" %></div>
+                </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-9 mt-5">
+            <h2 class="centered">Add subtask</h2>
+            <%= bootstrap_form_for(@task, url: create_subtask_project_task_path(@project, @task), method: "post") do |f| %>
+              <div class="row mt-3">
+                <div class="col-6"><%= f.text_field :title, require: true, label: "Add Subtask", label_class: "text-muted" %>
+              </div>
+                <div class="col-4 align-self-end update_btn"><%= f.primary "#{svg 'plus'}New Subtask".html_safe, render_as_button: true, class:  'btn btn-warning'%></div>
+              </div>
+              <% flash.each do |type, msg| %>
+                <% if type == 'alert' %>
+                <span class="small text-danger"><%= msg %></span>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
       </div>
-
-      <%= bootstrap_form_for(@task, url: create_subtask_project_task_path(@project, @task), method: "post") do |f| %>
-        <div class="row mt-3">
-          <div class="col-6"><%= f.text_field :title, require: true, label: "Add Subtask", label_class: "text-muted" %>
-        </div>
-          <div class="col-4 align-self-end update_btn"><%= f.primary "#{svg 'plus'}New Subtask".html_safe, render_as_button: true, class:  'btn btn-warning'%></div>
-        </div>
-        <% flash.each do |type, msg| %>
-          <% if type == 'alert' %>
-          <span class="small text-danger"><%= msg %></span>
-          <% end %>
-        <% end %>
-      <% end %>
-
-
-
   </div>
 </main>
 <nav class="navbar  navbar-light px-4 fixed-bottom justify-content-center">
