@@ -1,7 +1,10 @@
 class TasksController < ApplicationController
   before_action :get_project
-  before_action :set_task, only: [:edit, :update, :destroy, :create_subtask]
-  before_action :get_subtasks, only: [:destroy, :update]
+  before_action :set_task, only: [:edit, :update, :destroy, :create_subtask, :edit_subtask]
+  before_action :get_subtasks, only: [:destroy, :update, :edit_subtask]
+  before_action :edit_subtask, only: [:get_parent]
+  # before_action :set_subtask_as_task, only: [:edit_subtask]
+
 
   def new
     @task = @project.tasks.build
@@ -46,6 +49,10 @@ class TasksController < ApplicationController
     redirect_to @project unless @project.permissions[:can_write] || @project.permissions[:can_update]
   end
 
+  def edit_subtask
+    redirect_to @project unless @project.permissions[:can_write] || @project.permissions[:can_update]
+  end
+
   def update
     respond_to do |format|
       if params[:completed]
@@ -81,6 +88,17 @@ class TasksController < ApplicationController
     end
   end
 
+
+  def destroy_subtask
+    # delete all subtasks of the task to be destroyed
+    @task = @current_subtask
+    @task.destroy
+    respond_to do |format|
+      format.html { redirect_to project_path(@project, :anchor => "tasks") }
+      format.json { head :no_content }
+    end
+  end
+
   private
     def get_project
       @project = Project.find(params[:project_id])
@@ -97,6 +115,10 @@ class TasksController < ApplicationController
 
     def get_subtasks
       @subtasks = Task.where(parent_id: params[:id])
+    end
+    
+    def get_parent
+      @parent = Task.where(id: @task[:parent_id])
     end
 
     def task_params

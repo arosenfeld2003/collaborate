@@ -128,6 +128,9 @@
                                 <% if subtask.completed %></del><% end %>
                               <% end %>
                             </div>
+                            <%= link_to edit_subtask_project_task_path(@project, subtask) do %>
+                              <%= svg 'edit' %>
+                            <% end %>
                             <div class="col-1">
                               <%= link_to project_task_path(@project, subtask), method: :delete, data: { confirm: 'Do you really want to delete this task?' }  do %>
                                 <%= svg 'delete' %>

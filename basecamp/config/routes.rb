@@ -12,9 +12,10 @@ Rails.application.routes.draw do
     end
     resources :tasks do
       member do
-        post :create_subtask
+        post :create_subtask, :edit_subtask
         post :task_list_item
-        post :sub_task
+        get :edit_subtask
+        delete :edit_subtask
       end
     end
   end
