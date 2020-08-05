@@ -20,7 +20,6 @@
         <%= render :partial => 'tasks/index_admin', :object => @project %>
         <%= render :partial => 'add_attachment', :object => @project %>
         <%= render :partial => 'index_attachment', :object => @project %>
-        <%= render :partial => 'tasks/new', :object => @project.tasks.build, as: 'task' %>
       </div>
       <div class="col">
         <%= render :partial => 'sidebar', :object => @project %>
