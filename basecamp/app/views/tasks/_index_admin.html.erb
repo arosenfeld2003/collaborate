@@ -121,32 +121,30 @@
                     <% else %>
                       <% subtasks.each do |subtask| %>
                         <li class="list-group-item <%= 'text-muted' if subtask.completed %>">
-                            <% # render "tasks/subtasks", task: task %>
-                            <div class="row">
-                              <div class="col">
-                                <% # render "tasks/task_list_item", task: subtask %>
-                                <%= link_to [@project, subtask, :completed => true], method: :put do %>
-                                  <% if subtask.completed %>
-                                    <%= svg 'checked' %>
-                                  <% else %>
-                                    <%= svg 'unchecked'%>
-                                  <% end %>
+                          <div class="row">
+                            <div class="col">
+                              <%= link_to [@project, subtask, :completed => true], method: :put do %>
+                                <% if subtask.completed %>
+                                  <%= svg 'checked' %>
+                                <% else %>
+                                  <%= svg 'unchecked'%>
                                 <% end %>
-                                <%= link_to [@project, subtask], method: :put do %>
-                                  <% if subtask.completed %><del><% end %>
-                                    <%= subtask.title %>
-                                  <% if subtask.completed %></del><% end %>
-                                <% end %>
-                              </div>
-                              <%= link_to edit_subtask_project_task_path(@project, subtask) do %>
-                                <%= svg 'edit' %>
                               <% end %>
-                              <div class="col-1">
-                                <%= link_to project_task_path(@project, subtask), method: :delete, data: { confirm: 'Do you really want to delete this task?' }  do %>
-                                  <%= svg 'delete' %>
-                                <% end %>
-                              </div>
+                              <%= link_to [@project, subtask], method: :put do %>
+                                <% if subtask.completed %><del><% end %>
+                                  <%= subtask.title %>
+                                <% if subtask.completed %></del><% end %>
+                              <% end %>
                             </div>
+                            <%= link_to edit_subtask_project_task_path(@project, subtask) do %>
+                              <%= svg 'edit' %>
+                            <% end %>
+                            <div class="col-1">
+                              <%= link_to project_task_path(@project, subtask), method: :delete, data: { confirm: 'Do you really want to delete this task?' }  do %>
+                                <%= svg 'delete' %>
+                              <% end %>
+                            </div>
+                          </div>
                         </li>
                       <% end %>
                     <% end %>
