@@ -49,10 +49,8 @@
                   <% subtasks.each do |subtask| %>
                     <li class="<%= 'text-muted' if subtask.completed %>">
                       <div class="list-group-item">
-                        <% # render "tasks/subtasks", task: task %>
                         <div class="row">
                           <div class="col-2">
-                            <% # render "tasks/task_list_item", task: subtask %>
                             <%= link_to [@project, subtask, :completed => true], method: :put do %>
                               <% if subtask.completed %>
                                 <%= svg 'checked' %>
