@@ -17,7 +17,7 @@
         <div class="row justify-content-center">
           <div class="col-9 mt-5">
             <h2 class="centered">Add Subtask</h2>
-            <%= bootstrap_form_with(model: [@project, @task], local: true, method: "post") do |f| %>
+            <%= bootstrap_form_with(model: [@project, @task], url: create_subtask_project_task_path(@project, @task), local: true, method: "post") do |f| %>
             <%#= bootstrap_form_for(@task, url: create_subtask_project_task_path(@project, @task), method: "post") do |f| %>
               <div class="row mt-3">
                 <div class="col-6"><%= f.text_field :title, require: true, placeholder: "Add Subtask", label: "Add Subtask", label_class: "text-muted" %>
