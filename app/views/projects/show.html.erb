@@ -14,13 +14,9 @@
           <%= render :partial => 'topics/new', :object => @project.topics.build, as: 'topic' %>
         <% end %>
         <%= render :partial => 'topics/index', :object => @project %>
-        <%# if @project.permissions[:can_write] && @project.permissions[:can_update] %>
         <% if @project.permissions[:can_write] %>
           <%= render :partial => 'tasks/new', :object => @project.tasks.build, as: 'task' %>
         <% end %>
-        <%#  if @project.permissions[:can_update] %>
-          <%#= render :partial => 'tasks/edit', %>
-        <%# end %>
         <%= render :partial => 'tasks/index_admin', :object => @project %>
         <%= render :partial => 'add_attachment', :object => @project %>
         <%= render :partial => 'index_attachment', :object => @project %>
