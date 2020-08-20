@@ -31,10 +31,13 @@
                   <span class="badge badge-secondary"><%= task.subtasks.length %></span><%= link_to "", class: "content-toggle-btn" do %>
                     <%= svg 'list_tasks' %>
                   <% end %>
-                  <% if @project.permissions[:can_update] && @project.permissions[:can_update] %>
+                  <%# if @project.permissions[:can_update] && @project.permissions[:can_update] %>
+                  <% if @project.permissions[:can_update] %>
                     <%= link_to edit_project_task_path(@project, task) do %>
                       <%= svg 'edit' %>
                     <% end %>
+                  <% end %>
+                  <% if @project.permissions[:can_delete] %>
                     <%= link_to project_task_path(@project, task), method: :delete, data: { confirm: 'Do you really want to delete this task?' }  do %>
                       <%= svg 'delete' %>
                     <% end %>
