@@ -28,7 +28,10 @@
                 </div>
                 <div class="col-3"></div>
                 <div class="col-auto">
-                  <span class="badge badge-secondary"><%= task.subtasks.length %></span><%= link_to "", class: "content-toggle-btn" do %>
+                  <span class="badge badge-secondary">
+                    <%= task.subtasks.length %>
+                  </span>
+                  <%= link_to "", class: "content-toggle-btn" do %>
                     <%= svg 'list_tasks' %>
                   <% end %>
                   <% if @project.permissions[:can_update] %>
@@ -77,7 +80,6 @@
             </div>
           </li>
           <% elsif task.is_parent %>
-            <% # render "tasks/task_list_item", task: task %>
             <li class="list-group-item <%= 'text-muted' if task.completed %>">
               <div class="row">
                 <div class="col-1">
@@ -121,10 +123,8 @@
                     <% else %>
                       <% subtasks.each do |subtask| %>
                         <li class="list-group-item <%= 'text-muted' if subtask.completed %>">
-                            <% # render "tasks/subtasks", task: task %>
                             <div class="row">
                               <div class="col">
-                                <% # render "tasks/task_list_item", task: subtask %>
                                 <%= link_to [@project, subtask, :completed => true], method: :put do %>
                                   <% if subtask.completed %>
                                     <%= svg 'checked' %>
