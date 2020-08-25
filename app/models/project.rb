@@ -46,7 +46,12 @@ class Project < ApplicationRecord
       return permissions
     end
     member = Member.where(:email => current_user.email, :project => project)[0]
-    permissions.keys.each {|key| permissions[key] = member[key]}
+    permissions.keys.each do |key|
+      if member[:can_write] || member[:can_update] || member[:can_delete]
+        member[:can_read] = true
+      end
+      permissions[key] = member[key]
+    end
     return permissions
   end
 end
