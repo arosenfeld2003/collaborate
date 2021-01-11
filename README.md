@@ -1,6 +1,23 @@
 # See It Live: [BASECAMP](https://stormy-crag-63797.herokuapp.com/)
 
-This is a clone of the popular project management app Basecamp.  It was built with two other fellows at Qwasar Silicon Valley.  Our app includes the ability for users to create an authenticated account with multiple projects.  Projects can have many members, with varying permissions to view/edit the project.  Each project can have discussion threads (with sub-threads), attachments (text or image files), and tasks  (with sub-tasks) to be completed.
+This is a project management app, with many features of the popular app Basecamp.  I built this app with two other fellows at Qwasar Silicon Valley.  
+
+Features include:
+- User authenticated accounts and secure login
+[Login](readme_images/projects.png)
+- Ability for users to create or participate in multiple projects
+[Projects Page](readme_images/projects.png)
+- Various permission levels for each user in a project to view/edit
+[Member Permissions](readme_images/member-permissions.png)
+- Discussion threads with topics and sub-topics
+[Discussions](readme_images/discussions.png)
+- Ability to add attachments (text and image files)
+[Attachments](readme_images/attachments.png)
+- A todo-list for each project with tasks and sub-tasks - clicking the gear wheel allows you to edit tasks/subtasks
+[Tasks](readme_images/edit-tasks.png)
+- Anchor links to display different sections of the project page
+[Anchors](readme_images/anchors.png)
+
 
 My specific contributions include:
 - Create initial framework of the app and database (with Active Record and Devise gem)
