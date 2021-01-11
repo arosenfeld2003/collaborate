@@ -4,19 +4,19 @@ This is a project management app, with many features of the popular app Basecamp
 
 Features include:
 - User authenticated accounts and secure login
-[Login](readme_images/projects.png)
+![Login](readme_images/projects.png)
 - Ability for users to create or participate in multiple projects
-[Projects Page](readme_images/projects.png)
+![Projects Page](readme_images/projects.png)
 - Various permission levels for each user in a project to view/edit
-[Member Permissions](readme_images/member-permissions.png)
+![Member Permissions](readme_images/member-permissions.png)
 - Discussion threads with topics and sub-topics
-[Discussions](readme_images/discussions.png)
+![Discussions](readme_images/discussions.png)
 - Ability to add attachments (text and image files)
-[Attachments](readme_images/attachments.png)
+![Attachments](readme_images/attachments.png)
 - A todo-list for each project with tasks and sub-tasks - clicking the gear wheel allows you to edit tasks/subtasks
-[Tasks](readme_images/edit-tasks.png)
+![Tasks](readme_images/edit-tasks.png)
 - Anchor links to display different sections of the project page
-[Anchors](readme_images/anchors.png)
+![Anchors](readme_images/anchors.png)
 
 
 My specific contributions include:
