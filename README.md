@@ -4,7 +4,7 @@ This is a project management app, with many features of the popular app Basecamp
 
 Features include:
 - User authenticated accounts and secure login
-![Login](readme_images/projects.png)
+![Login](readme_images/login.png)
 - Ability for users to create or participate in multiple projects
 ![Projects Page](readme_images/projects.png)
 - Various permission levels for each user in a project to view/edit
